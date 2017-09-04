@@ -1,0 +1,14 @@
+package be.formation.config;
+
+import org.springframework.context.annotation.Configuration;
+
+import be.formation.domain.ChatBot;
+
+@Configuration
+public class AppConfig {
+	
+	public ChatBot chatBot() {
+		return new ChatBot();
+	}
+
+}

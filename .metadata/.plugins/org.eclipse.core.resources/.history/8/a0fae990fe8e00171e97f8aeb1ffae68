@@ -1,0 +1,14 @@
+package be.formation.beans;
+
+import org.jibble.pircbot.User;
+
+public class chatUser{
+
+	String name;
+	
+	chatUser(String name) {
+
+		this.name = name;
+	}
+
+}

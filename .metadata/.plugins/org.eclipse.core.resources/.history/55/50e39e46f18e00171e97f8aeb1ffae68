@@ -1,0 +1,15 @@
+package be.formation.domain;
+
+import org.jibble.pircbot.PircBot;
+
+public class ChatBot extends PircBot {
+	
+	private String hostname;
+	private String port;
+	private String password;
+
+	public ChatBot() {
+		this.setName("FeulBot");
+	}
+
+}

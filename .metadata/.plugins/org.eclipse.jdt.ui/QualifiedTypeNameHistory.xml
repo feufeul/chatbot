@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.jibble.pircbot.PircBot"/>
+<fullyQualifiedTypeName name="be.formation.ChatBotApplication"/>
+<fullyQualifiedTypeName name="be.formation.domain.ChatBot"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Scope"/>
+<fullyQualifiedTypeName name="javax.inject.Singleton"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.PropertySource"/>
+<fullyQualifiedTypeName name="org.springframework.boot.context.properties.ConfigurationProperties"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.jibble.pircbot.User"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+<fullyQualifiedTypeName name="com.google.firebase.database.DatabaseReference"/>
+<fullyQualifiedTypeName name="com.google.firebase.database.FirebaseDatabase"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
+<fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="com.google.firebase.FirebaseOptions"/>
+<fullyQualifiedTypeName name="com.google.firebase.FirebaseApp"/>
+<fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.EnableAutoConfiguration"/>
+<fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+<fullyQualifiedTypeName name="javax.persistence.Column"/>
+<fullyQualifiedTypeName name="javax.persistence.Table"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.support.JpaRepositoryFactory"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+<fullyQualifiedTypeName name="be.formation.beans.chatUser"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.config.EnableJpaRepositories"/>
+<fullyQualifiedTypeName name="javax.sql.DataSource"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
+<fullyQualifiedTypeName name="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+<fullyQualifiedTypeName name="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"/>
+<fullyQualifiedTypeName name="org.springframework.transaction.PlatformTransactionManager"/>
+<fullyQualifiedTypeName name="org.springframework.orm.jpa.JpaTransactionManager"/>
+</qualifiedTypeNameHistroy>

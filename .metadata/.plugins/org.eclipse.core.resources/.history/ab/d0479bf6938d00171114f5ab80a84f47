@@ -1,0 +1,27 @@
+package be.formation;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import be.formation.domain.ChatBot;
+
+@SpringBootApplication
+public class ChatBotApplication {
+
+	public static void main(String[] args){
+		SpringApplication.run(ChatBotApplication.class, args);
+		//TODO
+        try {
+			// Now start our bot up.
+			ChatBot bot = new ChatBot();
+			
+			// Enable debugging output.
+			bot.setVerbose(true);
+			bot.connect("irc.chat.twitch.tv",6667, "oauth:vczl8cowuw469vhyuieidjez6mteve");
+			bot.joinChannel("#feufeul_talmie");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

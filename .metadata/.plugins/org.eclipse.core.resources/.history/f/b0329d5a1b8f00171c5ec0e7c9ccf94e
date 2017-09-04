@@ -1,0 +1,54 @@
+package be.formation.config;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import be.formation.domain.ChatBot;
+
+@Configuration
+@EnableJpaRepositories
+@PropertySource("classpath:application.properties")
+public class AppConfig {
+	
+	@Value("${chatbot.hostname}")
+	private String hostname;
+	@Value("${chatbot.port}")
+	private int effectivePort;
+	@Value("${chatbot.password}")
+	private String pass;
+	@Value("${chatbot.channelName}")
+	private String channelName;
+	
+	@Bean
+	@Scope(value="singleton")
+	public ChatBot chatBot() {
+		ChatBot bot = new ChatBot();
+		
+		try {
+			// Enable debugging output.
+			bot.setVerbose(true);
+			//TODO change authentification / name to properties
+			bot.connect(hostname,effectivePort, pass);
+			bot.joinChannel(channelName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bot;
+	}
+
+
+}

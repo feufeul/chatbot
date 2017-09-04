@@ -1,0 +1,18 @@
+package be.formation.domain;
+
+import org.jibble.pircbot.PircBot;
+import org.springframework.beans.factory.annotation.Value;
+
+public class ChatBot extends PircBot {
+	
+	@Value()
+	private String hostname;
+	private String port;
+	private String password;
+	private String channelName;
+
+	public ChatBot() {
+		this.setName("FeulBot");
+	}
+
+}

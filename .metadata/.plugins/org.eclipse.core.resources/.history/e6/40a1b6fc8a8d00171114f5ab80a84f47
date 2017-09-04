@@ -1,0 +1,5 @@
+package be.formation.domain;
+
+public class ChatBot {
+
+}

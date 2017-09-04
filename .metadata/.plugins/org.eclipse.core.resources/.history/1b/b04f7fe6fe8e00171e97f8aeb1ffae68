@@ -1,0 +1,12 @@
+package be.formation.beans;
+
+public class chatUser{
+
+	String name;
+	
+	chatUser(String name) {
+
+		this.name = name;
+	}
+
+}
