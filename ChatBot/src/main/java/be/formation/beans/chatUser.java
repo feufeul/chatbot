@@ -1,7 +1,11 @@
 package be.formation.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -16,6 +20,8 @@ public class ChatUser{
 	private String name;
 	private int messagesSent;
 	private boolean isModerator;
+	@ManyToMany
+	private List<Event> events;
 	
 	ChatUser(){
 	}
@@ -29,6 +35,7 @@ public class ChatUser{
 		this.name =name;
 		this.messagesSent=1;
 		this.isModerator=false;
+		this.events = new ArrayList<>();
 	}
 
 	/**
@@ -39,10 +46,10 @@ public class ChatUser{
 		return name;
 	}
 	/**
-	 * Check if a User is a moderator
+	 * Check if a User is a moderator, need to use GetIsModerator, because Thymeleaf is looking for Getter beginning with "get"
 	 * @return
 	 */
-	public boolean isModerator() {
+	public boolean getIsModerator() {
 		return isModerator;
 	}
 
@@ -80,6 +87,15 @@ public class ChatUser{
 
 	public void setModerator(boolean isModerator) {
 		this.isModerator = isModerator;
+	}
+	
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	@Override

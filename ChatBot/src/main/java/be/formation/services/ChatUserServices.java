@@ -1,9 +1,12 @@
 package be.formation.services;
 
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import be.formation.beans.ChatUser;
+import be.formation.beans.Event;
 
 public interface ChatUserServices {
 
@@ -26,6 +29,23 @@ public interface ChatUserServices {
 	 */
 	public ChatUser findOne(String str);
 
+	/**
+	 * Find all users in db
+	 * @return A List of all the users
+	 */
 	public List<ChatUser> findAll();
+	
+	/**
+	 * Delete the moderator status from a user, from chat and db
+	 */
+	public void unModerator(String name);
+	
+	/**
+	 * Create an event where everybody can participate
+	 * @param name of the event
+	 * @param date of the event
+	 * @param participants --> number of participants
+	 */
+	public void createEvent(Event event);
 
 }

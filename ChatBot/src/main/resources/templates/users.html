@@ -15,6 +15,8 @@
 
 <link href="../static/css/styles.css" th:href="@{/css/styles.css}"
 	rel="stylesheet" media="screen" />
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -34,13 +36,10 @@
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#">Page 1</a></li>
 					<li><a href="#">Page 2</a></li>
-					<li><a href="#">Page 3</a></li>
+					<li><a href="#">Users</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-							Sign Up</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-							Login</a></li>
+
 				</ul>
 			</div>
 		</div>
@@ -62,12 +61,14 @@
 						<tr>
 							<td>Name</td>
 							<td>Messages sent</td>
+							<td>Moderator</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="user : ${users}">
 							<td th:text="${user.name}">test</td>
 							<td th:text="${user.messagesSent}">0</td>
+							<td th:text="${user.isModerator}">false</td>
 							<!-- TODO : CHECK HOW TO IMPLEMENT THE IF IN THYMELEAF -->
 
 						</tr>
@@ -83,14 +84,11 @@
 
 
 	</div>
-	<!-- /.container -->
 
-	<script
-		src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
-		th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
-	<script
-		src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/js/bootstrap.min.js"
-		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 
 
 </body>

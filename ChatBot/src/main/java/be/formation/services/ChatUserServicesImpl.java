@@ -1,49 +1,75 @@
 package be.formation.services;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.repository.core.support.EventPublishingRepositoryProxyPostProcessor;
 import org.springframework.stereotype.Service;
 
 import be.formation.beans.ChatUser;
+import be.formation.beans.Event;
+import be.formation.domain.ChatBot;
 import be.formation.repository.ChatUserRepository;
+import be.formation.repository.EventRepository;
 
 @Service
+@PropertySource("classpath:application.properties")
 public class ChatUserServicesImpl implements ChatUserServices{
 
-	private ChatUserRepository repo;
+	@Autowired
+	private ChatBot bot;
+	private ChatUserRepository repoUser;
+	private EventRepository repoEvent;
 	
 	@Autowired
 	public ChatUserServicesImpl(ChatUserRepository repo) {
 		super();
-		this.repo = repo;
+		this.repoUser = repo;
 	}
 	
 	@Override
 	public void incrMessagesSent(ChatUser usr) {
 
 		usr.incrmessagesSent();
-		repo.save(usr);
+		repoUser.save(usr);
 	}
 
 	@Override
 	public void createUser(ChatUser usr) {
 
-		repo.save(usr);
+		repoUser.save(usr);
 		
 	}
 
 	@Override
 	public ChatUser findOne(String str) {
 		
-		return repo.findOne(str);
+		return repoUser.findOne(str);
 		
 	}
 
 	@Override
 	public List<ChatUser> findAll() {
 	
-		return repo.findAll();
+		return repoUser.findAll();
+	}
+
+	@Override
+	public void unModerator(String name) {
+		// TODO Auto-generated method stub
+		bot.deOp("#feufeul_talmie", name);
+		
+	}
+
+	@Override
+	public void createEvent(Event event) {
+		
+		repoEvent.save(event);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

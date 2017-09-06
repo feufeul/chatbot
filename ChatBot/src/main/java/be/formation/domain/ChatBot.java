@@ -1,9 +1,13 @@
 package be.formation.domain;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import org.jibble.pircbot.PircBot;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import be.formation.beans.ChatUser;
+import be.formation.beans.Event;
 import be.formation.services.ChatUserServices;
 
 public class ChatBot extends PircBot {
@@ -22,10 +26,16 @@ public class ChatBot extends PircBot {
 		ChatUser usr = services.findOne(sender);
 		if(usr == null) {
 			System.out.println("create in db");
-			services.createUser(usr);
+			services.createUser(new ChatUser(sender));
 		}else {
 			System.out.println("update db");
 			services.incrMessagesSent(usr);
+			if(usr.getName().equals("feufeul_talmie")) {
+				
+				services.createEvent(new Event("demain", LocalDate.now()));
+				//services.unModerator("wizebot");
+				
+			}
 		}
 	}
 
