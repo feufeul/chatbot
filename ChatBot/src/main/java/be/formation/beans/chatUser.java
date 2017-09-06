@@ -1,12 +1,12 @@
 package be.formation.beans;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class ChatUser{
 
 	/**
@@ -24,9 +24,11 @@ public class ChatUser{
 	 * ChatUser's constructor
 	 * @param name used by chatter
 	 */
-	ChatUser(String name) {
+	public ChatUser(String name) {
 
 		this.name =name;
+		this.messagesSent=1;
+		this.isModerator=false;
 	}
 
 	/**
@@ -60,8 +62,8 @@ public class ChatUser{
 	/**
 	 * Increment the number of messages sent
 	 */
-	public void incrmessagesSent() {
-		messagesSent++;
+	public int incrmessagesSent() {
+		return ++messagesSent;
 	}
 
 	public int getMessagesSent() {
@@ -78,6 +80,11 @@ public class ChatUser{
 
 	public void setModerator(boolean isModerator) {
 		this.isModerator = isModerator;
+	}
+
+	@Override
+	public String toString() {
+		return "ChatUser [name=" + name + ", messagesSent=" + messagesSent + ", isModerator=" + isModerator + "]";
 	}
 
 

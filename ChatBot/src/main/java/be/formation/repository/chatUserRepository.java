@@ -7,5 +7,5 @@ import be.formation.beans.ChatUser;
 
 @Repository
 public interface ChatUserRepository extends JpaRepository<ChatUser, String>{
-
+	
 }

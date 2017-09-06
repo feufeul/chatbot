@@ -1,1 +1,5 @@
-/target
+/target/
+/Tomcat_8.0.36
+.metadata/
+.recommenders/
+

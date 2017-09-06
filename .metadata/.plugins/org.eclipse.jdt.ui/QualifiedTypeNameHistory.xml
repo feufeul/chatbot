@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="javax.inject.Singleton"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.PropertySource"/>
 <fullyQualifiedTypeName name="org.springframework.boot.context.properties.ConfigurationProperties"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.jibble.pircbot.User"/>
 <fullyQualifiedTypeName name="javax.persistence.Entity"/>
 <fullyQualifiedTypeName name="javax.persistence.Id"/>
@@ -24,7 +23,6 @@
 <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
 <fullyQualifiedTypeName name="javax.persistence.Column"/>
 <fullyQualifiedTypeName name="javax.persistence.Table"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.support.JpaRepositoryFactory"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
 <fullyQualifiedTypeName name="be.formation.beans.chatUser"/>
@@ -38,4 +36,21 @@
 <fullyQualifiedTypeName name="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"/>
 <fullyQualifiedTypeName name="org.springframework.transaction.PlatformTransactionManager"/>
 <fullyQualifiedTypeName name="org.springframework.orm.jpa.JpaTransactionManager"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="org.apache.bsf.util.Bean"/>
+<fullyQualifiedTypeName name="org.apache.camel.language.Bean"/>
+<fullyQualifiedTypeName name="org.springframework.context.ConfigurableApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.boot.SpringApplication"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="be.formation.repository.ChatUserServicesImpl"/>
+<fullyQualifiedTypeName name="be.formation.services.ChatUserServices"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="be.formation.repository.ChatUserRepository"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Modifying"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+<fullyQualifiedTypeName name="be.formation.beans.ChatUser"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="javax.persistence.FetchType"/>
 </qualifiedTypeNameHistroy>
