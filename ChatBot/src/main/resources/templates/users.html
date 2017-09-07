@@ -62,6 +62,7 @@
 							<td>Name</td>
 							<td>Messages sent</td>
 							<td>Moderator</td>
+							<td>Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -69,7 +70,11 @@
 							<td th:text="${user.name}">test</td>
 							<td th:text="${user.messagesSent}">0</td>
 							<td th:text="${user.isModerator}">false</td>
-							<!-- TODO : CHECK HOW TO IMPLEMENT THE IF IN THYMELEAF -->
+							<td>
+								 <form th:action="@{/deleteUser/{id}(id=${user.name})}" method="post">
+          						    <button type="submit" value="Submit">Delete</button>
+          						 </form>
+							</td> 
 
 						</tr>
 					</tbody>
@@ -96,6 +101,7 @@
 							<td>ID</td>
 							<td>Date</td>
 							<td>Description</td>
+							<td>Action</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -103,8 +109,11 @@
 							<td th:text="${event.id}">001</td>
 							<td th:text="${event.date}">2000/02/01</td>
 							<td th:text="${event.description}">test</td>
-							<!-- TODO : CHECK HOW TO IMPLEMENT THE IF IN THYMELEAF -->
-
+							<td>
+								 <form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
+          						    <button type="submit" value="Submit">Delete</button>
+          						 </form>
+							</td> 
 						</tr>
 					</tbody>
 

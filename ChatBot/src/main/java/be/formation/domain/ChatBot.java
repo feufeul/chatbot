@@ -1,11 +1,10 @@
 package be.formation.domain;
 
 import java.time.LocalDateTime;
+
 import org.jibble.pircbot.PircBot;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import be.formation.beans.ChatUser;
-import be.formation.beans.Event;
 import be.formation.services.ChatUserServices;
 
 public class ChatBot extends PircBot {
@@ -21,8 +20,7 @@ public class ChatBot extends PircBot {
 	@Override
 	protected void onMessage(String channel, String sender, String login, String hostname, String message) {
 		// TODO export this to an external method, this will add new User or increment
-		// message
-		ChatUser usr = services.findOne(sender);
+		ChatUser usr = services.findOneUser(sender);
 		if (usr == null) {
 			System.out.println("create in db");
 			services.createUser(new ChatUser(sender));
@@ -39,6 +37,7 @@ public class ChatBot extends PircBot {
 				//TODO Manage the complete regex and commands
 				if(message.startsWith("!participate")) {
 					services.participateEvent(sender, message);
+					
 				}
 			}
 		}

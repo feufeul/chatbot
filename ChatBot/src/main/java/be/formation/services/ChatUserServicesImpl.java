@@ -44,7 +44,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	}
 
 	@Override
-	public ChatUser findOne(String str) {
+	public ChatUser findOneUser(String str) {
 		
 		return repoUser.findOne(str);
 		
@@ -74,6 +74,12 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	}
 
 	@Override
+	public Event findOneEvent(int id) {
+
+		return repoEvent.findOne(id);
+
+	}
+	@Override
 	public List<Event> findAllEvents() {
 		return repoEvent.findAll();
 	}
@@ -102,5 +108,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 		repoEvent.delete(event);
 		
 	}
+
+
 
 }

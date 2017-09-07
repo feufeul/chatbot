@@ -32,7 +32,7 @@ public interface ChatUserServices {
 	 * @param The nickname of the chatter
 	 * @return An entity of the ChatUser
 	 */
-	public ChatUser findOne(String str);
+	public ChatUser findOneUser(String str);
 
 	/**
 	 * Find all users in db
@@ -62,6 +62,13 @@ public interface ChatUserServices {
 	 * Find all events in db
 	 * @return
 	 */
+	
+	/**
+	 * Find one event in db
+	 * @param id
+	 * @return
+	 */
+	public Event findOneEvent(int id);
 	public List<Event> findAllEvents();
 	
 	/**
