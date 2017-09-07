@@ -10,6 +10,7 @@ import be.formation.beans.Event;
 import be.formation.domain.ChatBot;
 import be.formation.repository.ChatUserRepository;
 import be.formation.repository.EventRepository;
+import be.formation.utils.Utils;
 
 @Service
 @PropertySource("classpath:application.properties")
@@ -49,7 +50,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	}
 
 	@Override
-	public List<ChatUser> findAll() {
+	public List<ChatUser> findAllUser() {
 	
 		return repoUser.findAll();
 	}
@@ -65,13 +66,26 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	public void createEvent(String sender, String message) {
 		
 		bot.sendMessage("#feufeul_talmie", "Nous allons créer ton événement");
-		String[] words = message.split(" ");
-		for(String s : words) {
-			System.out.println(s);
-		}
-		Event event = new Event();
-		repoEvent.save(event);
+		Event event = new Event("description", Utils.stringToDate(message));
+		if(event.getDate() != null)
+			repoEvent.save(event);
 		
+	}
+
+	@Override
+	public List<Event> findAllEvents() {
+		return repoEvent.findAll();
+	}
+
+	@Override
+	public void participateEvent(String sender, String message) {
+		bot.sendMessage("#feufeul_talmie", "Nous prenons en compte votre participation");
+		Event event = repoEvent.findOne(Utils.stringToParticipation(message));
+		List<ChatUser> users = event.getUsers();
+		ChatUser user = repoUser.findOne(sender);
+		users.add(user);
+		event.setUsers(users);
+		repoEvent.save(event);
 	}
 
 }

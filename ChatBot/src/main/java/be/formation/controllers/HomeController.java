@@ -17,7 +17,8 @@ public class HomeController {
 	@RequestMapping("/users")
 	public String usersPage(@RequestParam(value = "message", required = false, defaultValue = "Welcome") String str,
 			Model model) {
-		model.addAttribute("users", service.findAll());
+		model.addAttribute("users", service.findAllUser());
+		model.addAttribute("events", service.findAllEvents());
 		return "users";
 	}
 }

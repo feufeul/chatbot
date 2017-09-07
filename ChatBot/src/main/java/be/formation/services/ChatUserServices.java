@@ -33,7 +33,7 @@ public interface ChatUserServices {
 	 * Find all users in db
 	 * @return A List of all the users
 	 */
-	public List<ChatUser> findAll();
+	public List<ChatUser> findAllUser();
 	
 	/**
 	 * Delete the moderator status from a user, from chat and db
@@ -42,9 +42,22 @@ public interface ChatUserServices {
 	
 	/**
 	 * Create an event where everybody can participate
-	 * @param name of the event
-	 * @param date of the event
+	 * @param sender of the event
+	 * @param message in the form of "!event yyyy MM dd hh mm"  
 	 */
 	void createEvent(String sender, String message);
+	
+	/**
+	 * Find all events in db
+	 * @return
+	 */
+	public List<Event> findAllEvents();
+	
+	/**
+	 * 
+	 * @param sender, name of the participant
+	 * @param message sent by the sender
+	 */
+	public void participateEvent(String sender, String message);
 
 }

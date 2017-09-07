@@ -1,6 +1,5 @@
 package be.formation.domain;
 
-
 import java.time.LocalDateTime;
 import org.jibble.pircbot.PircBot;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ public class ChatBot extends PircBot {
 
 	@Autowired
 	private ChatUserServices services;
-	
+
 	public ChatBot() {
 		super();
 		this.setName("FeulBot");
@@ -21,18 +20,26 @@ public class ChatBot extends PircBot {
 
 	@Override
 	protected void onMessage(String channel, String sender, String login, String hostname, String message) {
-		//TODO export this to an external method, this will add new User or increment message
+		// TODO export this to an external method, this will add new User or increment
+		// message
 		ChatUser usr = services.findOne(sender);
-		if(usr == null) {
+		if (usr == null) {
 			System.out.println("create in db");
 			services.createUser(new ChatUser(sender));
-		}else {
+		} else {
 			System.out.println("update db");
 			services.incrMessagesSent(usr);
-			if((usr.getName().equals("feufeul_talmie")) && (message.startsWith("!event "))) {
-				
-				services.createEvent(sender, message);
-				
+			if (usr.getName().equals("feufeul_talmie")) {
+				if (message.startsWith("!event ")) {
+					services.createEvent(sender, message);
+				}
+
+			}
+			if(message.startsWith("!")) {
+				//TODO Manage the complete regex and commands
+				if(message.startsWith("!participate")) {
+					services.participateEvent(sender, message);
+				}
 			}
 		}
 	}

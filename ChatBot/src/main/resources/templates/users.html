@@ -80,6 +80,40 @@
 			</div>
 
 		</div>
+		
+		<h1>Liste de tous les Events</h1>
+
+		<div class="panel panel-primary">
+
+			<div class="panel-heading">
+				<div>Liste des Events</div>
+			</div>
+
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>Date</td>
+							<td>Description</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="event : ${events}">
+							<td th:text="${event.id}">001</td>
+							<td th:text="${event.date}">2000/02/01</td>
+							<td th:text="${event.description}">test</td>
+							<!-- TODO : CHECK HOW TO IMPLEMENT THE IF IN THYMELEAF -->
+
+						</tr>
+					</tbody>
+
+
+
+				</table>
+			</div>
+
+		</div>
 
 
 

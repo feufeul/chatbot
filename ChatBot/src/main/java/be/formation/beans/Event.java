@@ -25,6 +25,7 @@ public class Event {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	// Auto conversion for date from sql and date from java 8
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime date;
 	private String description;
