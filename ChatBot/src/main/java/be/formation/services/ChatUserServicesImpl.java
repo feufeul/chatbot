@@ -18,6 +18,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 
 	@Autowired
 	private ChatBot bot;
+	@Autowired
 	private ChatUserRepository repoUser;
 	@Autowired
 	private EventRepository repoEvent;
@@ -80,12 +81,26 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	@Override
 	public void participateEvent(String sender, String message) {
 		bot.sendMessage("#feufeul_talmie", "Nous prenons en compte votre participation");
-		Event event = repoEvent.findOne(Utils.stringToParticipation(message));
+		int id = Utils.stringToParticipation(message);
+		Event event = repoEvent.findOne(id);
 		List<ChatUser> users = event.getUsers();
 		ChatUser user = repoUser.findOne(sender);
 		users.add(user);
 		event.setUsers(users);
 		repoEvent.save(event);
+	}
+
+	@Override
+	public void deleteUser(ChatUser usr) {
+
+		repoUser.delete(usr);
+	}
+
+	@Override
+	public void deleteEvent(Event event) {
+
+		repoEvent.delete(event);
+		
 	}
 
 }

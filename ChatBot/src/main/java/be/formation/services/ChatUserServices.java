@@ -1,8 +1,6 @@
 package be.formation.services;
 
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 import be.formation.beans.ChatUser;
@@ -21,6 +19,13 @@ public interface ChatUserServices {
 	 * @param usr
 	 */
 	public void createUser(ChatUser usr);
+	
+	/**
+	 * Deleting a chatter from db
+	 * @param usr
+	 */
+	public void deleteUser(ChatUser usr);
+	
 	
 	/**
 	 * Find the user in the database
@@ -45,7 +50,13 @@ public interface ChatUserServices {
 	 * @param sender of the event
 	 * @param message in the form of "!event yyyy MM dd hh mm"  
 	 */
-	void createEvent(String sender, String message);
+	public void createEvent(String sender, String message);
+	
+	/**
+	 * Delete event from database
+	 * @param event
+	 */
+	public void deleteEvent(Event event);
 	
 	/**
 	 * Find all events in db
