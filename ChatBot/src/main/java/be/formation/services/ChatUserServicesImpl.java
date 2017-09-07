@@ -1,12 +1,8 @@
 package be.formation.services;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.repository.core.support.EventPublishingRepositoryProxyPostProcessor;
 import org.springframework.stereotype.Service;
 
 import be.formation.beans.ChatUser;
@@ -22,6 +18,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	@Autowired
 	private ChatBot bot;
 	private ChatUserRepository repoUser;
+	@Autowired
 	private EventRepository repoEvent;
 	
 	@Autowired
@@ -65,10 +62,15 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	}
 
 	@Override
-	public void createEvent(Event event) {
+	public void createEvent(String sender, String message) {
 		
+		bot.sendMessage("#feufeul_talmie", "Nous allons créer ton événement");
+		String[] words = message.split(" ");
+		for(String s : words) {
+			System.out.println(s);
+		}
+		Event event = new Event();
 		repoEvent.save(event);
-		// TODO Auto-generated method stub
 		
 	}
 

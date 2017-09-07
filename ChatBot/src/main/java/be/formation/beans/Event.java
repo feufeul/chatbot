@@ -1,15 +1,17 @@
 package be.formation.beans;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import be.formation.utils.LocalDateTimeAttributeConverter;
 
 /**
  * This class provides the possibility to create events
@@ -21,18 +23,19 @@ import javax.persistence.Table;
 public class Event {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private LocalDate date;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
+	private LocalDateTime date;
 	private String description;
 	@ManyToMany(mappedBy="events")
 	private List<ChatUser> users;
 	
 	public Event() {
-		
+
 	}
 	
-	public Event( String description,LocalDate date) {
+	public Event( String description,LocalDateTime date) {
 		super();
 		this.date = date;
 		this.description = description;
@@ -41,6 +44,10 @@ public class Event {
 	
 	public long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setId(long id) {
@@ -53,10 +60,10 @@ public class Event {
 	public void setUsers(List<ChatUser> users) {
 		this.users = users;
 	}
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	public String getDescription() {
@@ -64,6 +71,11 @@ public class Event {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", date=" + date + ", description=" + description + ", users=" + users + "]";
 	}
 
 	

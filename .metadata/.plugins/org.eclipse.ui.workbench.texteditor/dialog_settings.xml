@@ -2,18 +2,24 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="chatUser" key="selection"/>
+		<item value="date" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Date"/>
+			<item value="role"/>
+			<item value="thyme"/>
+			<item value="compte"/>
+			<item value="package be.formation.controllers;"/>
 			<item value="ChatUser"/>
 			<item value="chatUser"/>
 			<item value="&#x09;&#x09;&lt;dependency&gt;"/>
 			<item value="messageSent"/>
 		</list>
 		<list key="replacehistory">
+			<item value="LocalDate"/>
 			<item value="ChatUser"/>
 			<item value="messagesSent"/>
 		</list>
@@ -22,7 +28,7 @@
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="706" key="DIALOG_X_ORIGIN"/>
-		<item value="253" key="DIALOG_Y_ORIGIN"/>
+		<item value="481" key="DIALOG_X_ORIGIN"/>
+		<item value="398" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

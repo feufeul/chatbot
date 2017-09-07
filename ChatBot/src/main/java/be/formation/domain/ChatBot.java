@@ -1,8 +1,7 @@
 package be.formation.domain;
 
-import java.sql.Date;
-import java.time.LocalDate;
 
+import java.time.LocalDateTime;
 import org.jibble.pircbot.PircBot;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,10 +29,9 @@ public class ChatBot extends PircBot {
 		}else {
 			System.out.println("update db");
 			services.incrMessagesSent(usr);
-			if(usr.getName().equals("feufeul_talmie")) {
+			if((usr.getName().equals("feufeul_talmie")) && (message.startsWith("!event "))) {
 				
-				services.createEvent(new Event("demain", LocalDate.now()));
-				//services.unModerator("wizebot");
+				services.createEvent(sender, message);
 				
 			}
 		}

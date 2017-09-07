@@ -44,8 +44,7 @@ public interface ChatUserServices {
 	 * Create an event where everybody can participate
 	 * @param name of the event
 	 * @param date of the event
-	 * @param participants --> number of participants
 	 */
-	public void createEvent(Event event);
+	void createEvent(String sender, String message);
 
 }

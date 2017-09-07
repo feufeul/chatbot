@@ -13,7 +13,7 @@ public class HomeController {
 
 	@Autowired
 	private ChatUserServices service;
-	
+
 	@RequestMapping("/users")
 	public String usersPage(@RequestParam(value = "message", required = false, defaultValue = "Welcome") String str,
 			Model model) {
