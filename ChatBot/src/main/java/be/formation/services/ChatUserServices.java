@@ -41,9 +41,16 @@ public interface ChatUserServices {
 	public List<ChatUser> findAllUser();
 	
 	/**
-	 * Delete the moderator status from a user, from chat and db
+	 * Promote a chatter to moderator
+	 * @param name moderator
 	 */
-	public void unModerator(String name);
+	public void upModerator(String name);
+	
+	/**
+	 * Unpromote a chatter from moderator
+	 * @param name of the chatter
+	 */
+	public void downModerator(String name);
 	
 	/**
 	 * Create an event where everybody can participate
@@ -69,6 +76,11 @@ public interface ChatUserServices {
 	 * @return
 	 */
 	public Event findOneEvent(int id);
+	
+	/**
+	 * Find all events in db
+	 * @return a list of events
+	 */
 	public List<Event> findAllEvents();
 	
 	/**

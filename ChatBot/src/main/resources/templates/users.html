@@ -1,60 +1,10 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
-
-<head>
-<title>Hello Spring Boot!</title>
-
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-<link
-	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-	rel="stylesheet" media="screen" />
-
-<link href="../static/css/styles.css" th:href="@{/css/styles.css}"
-	rel="stylesheet" media="screen" />
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-
-</head>
-<body>
-
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">ChatBot Configuration</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Page 1</a></li>
-					<li><a href="#">Page 2</a></li>
-					<li><a href="#">Users</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-
-				</ul>
-			</div>
-		</div>
-	</nav>
-
+<div layout:fragment="content" layout:decorator="layout">
 	<div class="container">
-
 		<h1>Liste de tous les Users</h1>
-
-		<div class="panel panel-primary">
-
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<div>Liste des Users</div>
 			</div>
-
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -62,38 +12,40 @@
 							<td>Name</td>
 							<td>Messages sent</td>
 							<td>Moderator</td>
-							<td>Action</td>
+							<td><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="user : ${users}">
 							<td th:text="${user.name}">test</td>
 							<td th:text="${user.messagesSent}">0</td>
-							<td th:text="${user.isModerator}">false</td>
 							<td>
-								 <form th:action="@{/deleteUser/{id}(id=${user.name})}" method="post">
-          						    <button type="submit" value="Submit">Delete</button>
-          						 </form>
-							</td> 
-
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary">Chatter</button>
+									<button type="button" class="btn btn-primary dropdown-toggle"
+										data-toggle="dropdown">
+										<span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Moderator</a></li>
+									</ul>
+								</div>	
+							</td>
+							<td>
+								<form th:action="@{/deleteUser/{id}(id=${user.name})}" method="post">
+									<button type="submit" value="Submit" class="btn btn-primary">Delete</button>
+								</form>
+							</td>
 						</tr>
 					</tbody>
-
-
-
 				</table>
 			</div>
-
 		</div>
-		
 		<h1>Liste de tous les Events</h1>
-
-		<div class="panel panel-primary">
-
+		<div class="panel panel-info">
 			<div class="panel-heading">
 				<div>Liste des Events</div>
 			</div>
-
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -110,29 +62,15 @@
 							<td th:text="${event.date}">2000/02/01</td>
 							<td th:text="${event.description}">test</td>
 							<td>
-								 <form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
-          						    <button type="submit" value="Submit">Delete</button>
-          						 </form>
-							</td> 
+								<form th:action="@{/deleteEvent/{id}(id=${event.id})}"
+									method="post">
+									<button type="submit" value="Submit" class="btn btn-primary">Delete</button>
+								</form>
+							</td>
 						</tr>
 					</tbody>
-
-
-
 				</table>
 			</div>
-
 		</div>
-
-
-
 	</div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-
-
-</body>
-</html>
+</div>

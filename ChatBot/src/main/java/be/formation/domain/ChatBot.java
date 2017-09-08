@@ -1,7 +1,5 @@
 package be.formation.domain;
 
-import java.time.LocalDateTime;
-
 import org.jibble.pircbot.PircBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import be.formation.beans.ChatUser;

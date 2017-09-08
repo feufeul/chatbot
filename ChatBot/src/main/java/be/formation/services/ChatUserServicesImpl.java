@@ -57,11 +57,25 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	}
 
 	@Override
-	public void unModerator(String name) {
-		// TODO Auto-generated method stub
-		bot.deOp("#feufeul_talmie", name);
+	public void upModerator(String name) {
+
+		bot.op("#feufeul_talmie", name);
+		ChatUser usr = repoUser.findOne(name);
+		usr.setModerator();
+		repoUser.save(usr);
 		
 	}
+	
+	@Override
+	public void downModerator(String name) {
+		// TODO Auto-generated method stub
+		bot.deOp("#feufeul_talmie", name);
+		ChatUser usr = repoUser.findOne(name);
+		usr.setModerator();
+		repoUser.save(usr);
+		
+	}
+	
 
 	@Override
 	public void createEvent(String sender, String message) {
