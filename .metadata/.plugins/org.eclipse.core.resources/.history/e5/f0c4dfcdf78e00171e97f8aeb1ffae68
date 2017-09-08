@@ -1,5 +1,0 @@
-#Credentials for the IRC chat
-chatbot.hostname=irc.chat.twitch.tv
-chatbot.port=6667
-chatbot.password=oauth\:vczl8cowuw469vhyuieidjez6mteve
-chatbot.channelName=#feufeul_talmie

@@ -34,10 +34,11 @@ public class HomeController {
 		model.addAttribute("events", service.findAllEvents());
 		return "users";
 	}
-//	@PostMapping
-//	public String upModerator(@PathVariable String id) {
-//		return "redirect:/users";
-//	}
+	@PostMapping("/upModerator/{id}")
+	public String upModerator(@PathVariable String id) {
+		service.downModerator(id);
+		return "redirect:/users";
+	}
 
     @PostMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable String id){
