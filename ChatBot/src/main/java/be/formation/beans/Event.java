@@ -29,7 +29,7 @@ public class Event {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	// Auto conversion for date from sql and date from java 8
+	// Auto convert for date from sql and date from java 8
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime date;
 	private String description;
@@ -52,7 +52,6 @@ public class Event {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -60,18 +59,23 @@ public class Event {
 	public List<ChatUser> getUsers() {
 		return users;
 	}
+	
 	public void setUsers(List<ChatUser> users) {
 		this.users = users;
 	}
+	
 	public LocalDateTime getDate() {
 		return date;
 	}
+	
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}

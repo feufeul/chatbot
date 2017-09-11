@@ -25,20 +25,16 @@ public class ChatBot extends PircBot {
 		} else {
 			System.out.println("update db");
 			services.incrMessagesSent(usr);
-			if (usr.getName().equals("feufeul_talmie")) {
-				if (message.startsWith("!event ")) {
-					services.createEvent(sender, message);
-				}
-
-			}
-			if(message.startsWith("!")) {
-				//TODO Manage the complete regex and commands
-				if(message.startsWith("!participate")) {
-					services.participateEvent(sender, message);
-					
-				}
+		}
+		if (usr.getName().equals("feufeul_talmie")) {
+			if (message.startsWith("!event ")) {
+				services.createEvent(sender, message);
 			}
 		}
-	}
 
+		if (message.startsWith("!participate")) {
+			services.participateEvent(sender, message);
+		}
+
+	}
 }

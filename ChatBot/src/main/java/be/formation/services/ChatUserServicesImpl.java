@@ -14,7 +14,7 @@ import be.formation.utils.Utils;
 
 @Service
 @PropertySource("classpath:application.properties")
-public class ChatUserServicesImpl implements ChatUserServices{
+public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Autowired
 	private ChatBot bot;
@@ -22,13 +22,13 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	private ChatUserRepository repoUser;
 	@Autowired
 	private EventRepository repoEvent;
-	
+
 	@Autowired
 	public ChatUserServicesImpl(ChatUserRepository repo) {
 		super();
 		this.repoUser = repo;
 	}
-	
+
 	@Override
 	public void incrMessagesSent(ChatUser usr) {
 
@@ -40,19 +40,19 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	public void createUser(ChatUser usr) {
 
 		repoUser.save(usr);
-		
+
 	}
 
 	@Override
 	public ChatUser findOneUser(String str) {
-		
+
 		return repoUser.findOne(str);
-		
+
 	}
 
 	@Override
 	public List<ChatUser> findAllUser() {
-	
+
 		return repoUser.findAll();
 	}
 
@@ -63,9 +63,9 @@ public class ChatUserServicesImpl implements ChatUserServices{
 		ChatUser usr = repoUser.findOne(name);
 		usr.setModerator(true);
 		repoUser.save(usr);
-		
+
 	}
-	
+
 	@Override
 	public void downModerator(String name) {
 
@@ -73,18 +73,24 @@ public class ChatUserServicesImpl implements ChatUserServices{
 		ChatUser usr = repoUser.findOne(name);
 		usr.setModerator(false);
 		repoUser.save(usr);
-		
+
 	}
-	
 
 	@Override
 	public void createEvent(String sender, String message) {
-		
+
 		bot.sendMessage("#feufeul_talmie", "Nous allons créer ton événement");
-		Event event = new Event("description", Utils.stringToDate(message));
-		if(event.getDate() != null)
-			repoEvent.save(event);
-		
+		try {
+			Event event = new Event(Utils.stringToDescription(message), Utils.stringToDate(message));
+			if (event.getDate() != null)
+				repoEvent.save(event);
+		} catch (Exception e) {
+			bot.sendMessage("#feufeul_talmie", "@"+sender+ " " + e.getMessage());
+			bot.sendMessage("#feufeul_talmie", "Pour inscrire un nouvel événement, il te faut l'inscrire selon ce modèle : "
+					+ "!event (description) yyyy MM dd hh mm ou celui-ci : "
+					+ "!event (description) yyyy MM dd");
+		}
+
 	}
 
 	@Override
@@ -93,6 +99,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 		return repoEvent.findOne(id);
 
 	}
+
 	@Override
 	public List<Event> findAllEvents() {
 		return repoEvent.findAll();
@@ -120,9 +127,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 	public void deleteEvent(Event event) {
 
 		repoEvent.delete(event);
-		
+
 	}
-
-
 
 }

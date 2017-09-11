@@ -1,53 +1,134 @@
 package be.formation.utils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import be.formation.exceptions.RegexNotRespectedException;
 
 public class Utils {
+	/**
+	 *  regex (description) yyyy MM dd hh mm
+	 */
+	private static final String PATTERN_WITH_HOURS = "([(])(.*)([)])([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
+	/**
+	 *  regex (description) yyyy MM dd
+	 */
+	private static final String PATTERN_WITHOUT_HOURS = "([(])(.*)([)])([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
 
 	/**
-	 * A method validating and transforming a string into date
+	 * Regex resolver
 	 * 
-	 * @param str
-	 * @return [regex]!event yyyy MM dd hh mm
+	 * @param message
+	 * @param pattern
+	 * @return
 	 */
-	public static LocalDateTime stringToDate(String message) {
+	public static Matcher regexResolve(String message, String pattern) {
 
-		String[] strTab = message.split(" ");
-		List<Integer> list = new ArrayList<>();
-		try {
-
-			for (int i = 1; i < strTab.length; i++) {
-				list.add(Integer.parseInt(strTab[i]));
-			}
-		} catch (Exception e) {
-			System.out.println("Mauvaise entrée numérique");
-		}
-		LocalDate date = null;
-		if (list.size() == 3 || list.size() == 5) {
-			date = LocalDate.of(list.get(0), list.get(1), list.get(2));
-
-			switch (list.size()) {
-
-			case 3:
-				return LocalDateTime.of(date, LocalTime.of(8, 0));
-			case 5:
-				return LocalDateTime.of(date, LocalTime.of(list.get(3), list.get(4)));
-			default:
-				return null;
-			}
-		} else {
-			return null;
-		}
+		Pattern r = Pattern.compile(pattern);
+		return r.matcher(message);
 
 	}
 
 	/**
+	 * A method who truncate the message, so only the parameters are retrieved
 	 * 
-	 * @param [regex]!participate id
+	 * @param message
+	 *            to redirect to the right function
+	 */
+	public static Object startsWith(String message) throws Exception {
+		String starter = message.split(" ")[0];
+		switch (starter) {
+
+		case "!event":
+			System.out.println("event");
+			return stringToDate(message.replaceFirst("!event ", ""));
+		case "!participate":
+			return stringToParticipation(message.replaceFirst("!participate ", ""));
+		default:
+			System.out.println("Mauvaise écriture.");
+			return null;
+
+		}
+	}
+
+	/**
+	 * A method validating and transforming a string into date
+	 * 
+	 * @param message
+	 *            without the !participate
+	 * @return [regex]!event (description) yyyy MM dd hh mm
+	 */
+	public static LocalDateTime stringToDate(String message) throws Exception {
+
+		Matcher m = regexResolve(message, PATTERN_WITH_HOURS);
+
+		if (m.groupCount() > 11 && m.find()) {
+			System.out.println("pattern avec heures");
+			try {
+				LocalDateTime date = LocalDateTime.of(Integer.parseInt(m.group(5)), Integer.parseInt(m.group(7)),
+						Integer.parseInt(m.group(9)), Integer.parseInt(m.group(11)), Integer.parseInt(m.group(13)));
+				if (date.isAfter(LocalDateTime.now())) {
+					return date;
+				} else {
+					throw new Exception("Date antérieure à la date actuelle");
+				}
+			} catch (Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		} else {
+
+			m = regexResolve(message, PATTERN_WITHOUT_HOURS);
+
+			if (m.find()) {
+				System.out.println("pattern sans heures");
+				try {
+					LocalDateTime date = LocalDateTime.of(Integer.parseInt(m.group(5)), Integer.parseInt(m.group(7)),
+							Integer.parseInt(m.group(9)), 8, 0);
+					if (date.isAfter(LocalDateTime.now())) {
+						return date;
+					} else {
+						throw new Exception("Date antérieure à la date actuelle");
+					}
+				} catch (Exception e) {
+					throw new RegexNotRespectedException(e.getMessage());
+				}
+			}
+		}
+		throw new Exception("Message ne respectant pas les contraintes");
+
+	}
+
+	/**
+	 * Look for the description in a message
+	 * 
+	 * @param message
+	 * @return
+	 */
+	public static String stringToDescription(String message) {
+
+		Matcher m = regexResolve(message, PATTERN_WITH_HOURS);
+
+		if (m.groupCount() > 11 && m.find()) {
+			System.out.println(m.group(2));
+			return m.group(2);
+		} else {
+			m = regexResolve(message, PATTERN_WITHOUT_HOURS);
+
+			if (m.find()) {
+				System.out.println(m.group(2));
+				return m.group(2);
+			}
+
+		}
+		System.out.println("Problème dans le pattern");
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param [regex]!participate
+	 *            id
 	 */
 	public static int stringToParticipation(String message) {
 

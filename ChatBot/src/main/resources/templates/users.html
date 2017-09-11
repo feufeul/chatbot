@@ -21,34 +21,33 @@
 							<td th:text="${user.messagesSent}">0</td>
 							<td>
 								<div class="btn-group">
-<!-- 									<button type="button" class="btn btn-primary" th:text="${user.isModerator}">Chatter</button> -->
-										<button type="button" class="btn btn-primary" >
-											<span th:switch="${user.isModerator}">
-												<span th:case="true">Moderator</span>
-												<span th:case="false">Chatter</span>
-											</span>
-										</button>
-										
-									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+
+									<!--  Here we check the boolean on Moderator so we can display the present value of the moderator / chatter -->
+									<button type="button" class="btn btn-primary">
+										<span th:switch="${user.isModerator}"> <span
+											th:case="true">Moderator</span> <span th:case="false">Chatter</span>
+										</span>
+									</button>
+									<!-- 									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button> -->
+									<button type="button" id="dropdownMenu"
+										class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">
 										<span class="caret"></span>
 									</button>
-									<ul class="dropdown-menu" role="menu">
-										<li>
-										<!--  Here I just put the opposite setter for Moderator -->
-											<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
-												<button type="submit" name="user" value="chatter" class="btn btn-primary">
-													Chatter
-												</button>
-												<button type="submit" name="user" value="mod" class="btn btn-primary">
-													Moderator
-												</button>
-											</form>
-										</li>
-									</ul>
-								</div>	
+									<div class="dropdown-menu" aria-labelledby="dropdownMenu">
+										<form th:action="@{/upModerator/{id}(id=${user.name})}"
+											method="post">
+											<button class="dropdown-item" type="submit" name="user"
+												value="chatter" class="btn btn-primary">Chatter</button>
+											<button class="dropdown-item" type="submit" name="user"
+												value="mod" class="btn btn-primary">Moderator</button>
+										</form>
+									</div>
+								</div>
 							</td>
 							<td>
-								<form th:action="@{/deleteUser/{id}(id=${user.name})}" method="post">
+								<form th:action="@{/deleteUser/{id}(id=${user.name})}"
+									method="post">
 									<button type="submit" value="Submit" class="btn btn-primary">Delete</button>
 								</form>
 							</td>
@@ -69,18 +68,32 @@
 							<td>ID</td>
 							<td>Date</td>
 							<td>Description</td>
-							<td>Action</td>
+							<td><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="event : ${events}">
 							<td th:text="${event.id}">001</td>
 							<td th:text="${event.date}">2000/02/01</td>
-							<td th:text="${event.description}">test</td>
-							<td>
-								<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
-									<button type="submit" value="Submit" class="btn btn-primary">Delete</button>
+							<td th:text="${event.description}">Description basique
+								<form th:action="@{/modifyEvent/{id}(id=${event.id})}" method="post">
+									<input type="submit" name="Delete" value="Delete" class="btn btn-primary"></input>
 								</form>
+							
+							</td>
+							<td>
+								<!-- Single button -->
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary dropdown-toggle"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">Action <span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
+									
+												<input type="submit" name="Delete" value="Delete" class="btn btn-primary"></input>
+										</form>
+									</ul>
+								</div>
 							</td>
 						</tr>
 					</tbody>
