@@ -61,7 +61,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 
 		bot.op("#feufeul_talmie", name);
 		ChatUser usr = repoUser.findOne(name);
-		usr.setModerator();
+		usr.setModerator(true);
 		repoUser.save(usr);
 		
 	}
@@ -71,7 +71,7 @@ public class ChatUserServicesImpl implements ChatUserServices{
 
 		bot.deOp("#feufeul_talmie", name);
 		ChatUser usr = repoUser.findOne(name);
-		usr.setModerator();
+		usr.setModerator(false);
 		repoUser.save(usr);
 		
 	}

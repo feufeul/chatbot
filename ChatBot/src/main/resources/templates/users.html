@@ -21,17 +21,26 @@
 							<td th:text="${user.messagesSent}">0</td>
 							<td>
 								<div class="btn-group">
-									<button type="button" class="btn btn-primary" th:text="${user.isModerator}">Chatter</button>
-									<button type="button" class="btn btn-primary dropdown-toggle"
-										data-toggle="dropdown">
+<!-- 									<button type="button" class="btn btn-primary" th:text="${user.isModerator}">Chatter</button> -->
+										<button type="button" class="btn btn-primary" >
+											<span th:switch="${user.isModerator}">
+												<span th:case="true">Moderator</span>
+												<span th:case="false">Chatter</span>
+											</span>
+										</button>
+										
+									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 										<span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
 										<li>
 										<!--  Here I just put the opposite setter for Moderator -->
 											<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
-												<button type="submit" value="Submit" class="btn btn-primary" th:text="${!user.isModerator}">
-													Moderator?
+												<button type="submit" name="user" value="chatter" class="btn btn-primary">
+													Chatter
+												</button>
+												<button type="submit" name="user" value="mod" class="btn btn-primary">
+													Moderator
 												</button>
 											</form>
 										</li>

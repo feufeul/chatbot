@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item value="true" key="Replace"/>
-	<item value="F:\bot_project\pircbot-1.5.0\pircbot-1.5.0" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="G:\bot_project\pircbot-1.5.0\pircbot-1.5.0" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="false" key="InstanceOf"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="renameSubpackages"/>

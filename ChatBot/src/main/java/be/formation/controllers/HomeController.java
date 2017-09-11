@@ -35,8 +35,15 @@ public class HomeController {
 		return "users";
 	}
 	@PostMapping("/upModerator/{id}")
-	public String upModerator(@PathVariable String id) {
-		service.downModerator(id);
+	public String upModerator(@PathVariable String id,
+			@RequestParam(value = "user", required = false) String user) {
+		if(user.equals("chatter")) {
+			System.out.println("downMod");
+			service.downModerator(id);
+		}else {
+			System.out.println("upMod");
+			service.upModerator(id);
+		}
 		return "redirect:/users";
 	}
 
