@@ -37,8 +37,7 @@
 										<span class="caret"></span>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenu">
-										<form th:action="@{/upModerator/{id}(id=${user.name})}"
-											method="post">
+										<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
 											<button class="dropdown-item" type="submit" name="user"
 												value="chatter" class="btn btn-primary">Chatter</button>
 											<button class="dropdown-item" type="submit" name="user"

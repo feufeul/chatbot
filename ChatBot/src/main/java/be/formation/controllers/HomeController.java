@@ -19,6 +19,11 @@ public class HomeController {
 
 	@Autowired
 	private ChatUserServices service;
+	
+	@RequestMapping("/login.html")
+	public String login() {
+	    return "login.html";
+	}
 
 	@RequestMapping("/")
 	public String indexPage(@RequestParam(value = "message", required = false, defaultValue = "Welcome") String str,
