@@ -1,5 +1,6 @@
 package be.formation.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -129,5 +130,13 @@ public class ChatUserServicesImpl implements ChatUserServices {
 		repoEvent.delete(event);
 
 	}
+
+	@Override
+	public void updateEvent(int id, LocalDateTime date, String description) {
+		Event event = new Event(id,date,description);
+		repoEvent.save(event);
+	}
+	
+	
 
 }

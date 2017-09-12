@@ -1,12 +1,15 @@
 package be.formation.services;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import be.formation.beans.ChatUser;
 import be.formation.beans.Event;
 
 public interface ChatUserServices {
+	
+	public void updateEvent(int id, LocalDateTime date, String description);
 
 	/**
 	 * Increment de number of messages that have been sent

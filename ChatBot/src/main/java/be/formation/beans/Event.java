@@ -48,6 +48,13 @@ public class Event {
 		this.users = new ArrayList<>();
 	}
 	
+	public Event(int id2, LocalDateTime date2, String description2) {
+		super();
+		this.id=id2;
+		this.description=description2;
+		this.date=date2;
+	}
+
 	public int getId() {
 		return id;
 	}

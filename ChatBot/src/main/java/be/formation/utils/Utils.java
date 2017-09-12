@@ -15,6 +15,14 @@ public class Utils {
 	 *  regex (description) yyyy MM dd
 	 */
 	private static final String PATTERN_WITHOUT_HOURS = "([(])(.*)([)])([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
+	/**
+	 * regex yyyy MM dd
+	 */
+	private static final String PATTERN_WITHOUT_DESC_AND_HOURS = "(\\d+)([ ])(\\d+)([ ])(\\d+)";/**
+	 * regex yyyy MM dd hh mm
+	 */
+	private static final String PATTERN_WITHOUT_DESC = "(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
+	
 
 	/**
 	 * Regex resolver
