@@ -70,6 +70,7 @@
 							<td>ID</td>
 							<td>Date</td>
 							<td>Description</td>
+							<td>Total participants</td>
 							<td><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
@@ -79,6 +80,7 @@
 							<td th:text="${event.id}">001</td>
 							<td th:text="${event.date}">2000/02/01</td>
 							<td th:text="${event.description}">Description basique <span><button>test</button></span></td>
+							<td th:text="${#lists.size(event.users)}"></td>
 							<td>
 								<div class="btn-group">
 								
@@ -92,18 +94,25 @@
 
 										<!-- Edit Button -->
 										
-										
-											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Edit"
-												name="Edit">Edit</button>
-												
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Edit"
+											name="Edit">Edit</button>
+											
+										<!-- DisplayList Button -->
+										<form th:action="@{/displayEvent/{id}(id=${event.id})}"  method="post">
+											<button type="submit" name="Display" value="Display" class="btn btn-primary">Display Participants</button>
+										</form>
+											
 						
-											<!-- Delete Button -->
+										<!-- Delete Button -->
 											
 										<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
 
 											<button type="submit" name="Delete" value="Delete"
 												class="btn btn-primary">Delete</button>
 										</form>
+										
+
+										
 									</div>
 								</div>
 							</td>
@@ -123,40 +132,39 @@
 
 			<!-- Modal content-->
 											
-<div class="modal-content">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"
-			aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 			<form id="edit-form" th:action="@{/modifyEvent/}" method="POST" name="editform">
 	
-	<div class="modal-body">
-		<div class="form-group">
-			<label for="id" class="control-label">id:</label>
-			<input type="number" class="form-control" id="recipient-name" name="id">
-		</div>
-		<div class="form-group">
-			<label for="recipient-name" class="control-label">Date:</label>
-			<input type="datetime-local" class="form-control" id="recipient-name" name="date">
-		</div>
-		<div class="form-group">
-			<label for="message-text" class="control-label">Description:</label>
-			<textarea class="form-control" id="message-text" name="description"></textarea>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		<button type="submit" name="Update" value="Update" class="btn btn-primary">Send modifications</button>
-	</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="id" class="control-label">id:</label>
+						<input type="number" class="form-control" id="recipient-name" name="id">
+					</div>
+					<div class="form-group">
+						<label for="recipient-name" class="control-label">Date:</label>
+						<input type="datetime-local" class="form-control" id="recipient-name" name="date">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="control-label">Description:</label>
+						<textarea class="form-control" id="message-text" name="description"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" name="Update" value="Update" class="btn btn-primary">Send modifications</button>
+				</div>
 			</form>
 	
-</div>
+	</div>
 
 
 	</div>
 </div>
-
-											
+									
 					

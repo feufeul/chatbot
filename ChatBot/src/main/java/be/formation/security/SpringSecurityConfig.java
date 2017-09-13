@@ -27,10 +27,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 				.formLogin()
 					.loginPage("/login").permitAll()
 					.failureUrl("/login-error").permitAll()
-			.and()
-				.logout()
-				.logoutUrl("/logout").permitAll()
-				.logoutSuccessUrl("/home").permitAll()
+//			.and()
+//				.logout()
+//				.logoutUrl("/logout").permitAll()
+//				.logoutSuccessUrl("/home").permitAll()
 			.and()
 				.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 		

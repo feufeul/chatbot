@@ -92,5 +92,12 @@ public interface ChatUserServices {
 	 * @param message sent by the sender
 	 */
 	public void participateEvent(String sender, String message);
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<ChatUser> getParticipants(int id);
 
 }

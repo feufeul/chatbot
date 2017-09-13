@@ -17,6 +17,7 @@ import be.formation.utils.Utils;
 @PropertySource("classpath:application.properties")
 public class ChatUserServicesImpl implements ChatUserServices {
 
+	private String channel = "#feufeul_talmie";
 	@Autowired
 	private ChatBot bot;
 	@Autowired
@@ -60,7 +61,7 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	@Override
 	public void upModerator(String name) {
 
-		bot.op("#feufeul_talmie", name);
+		bot.op(channel, name);
 		ChatUser usr = repoUser.findOne(name);
 		usr.setModerator(true);
 		repoUser.save(usr);
@@ -70,7 +71,7 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	@Override
 	public void downModerator(String name) {
 
-		bot.deOp("#feufeul_talmie", name);
+		bot.deOp(channel, name);
 		ChatUser usr = repoUser.findOne(name);
 		usr.setModerator(false);
 		repoUser.save(usr);
@@ -80,14 +81,14 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	@Override
 	public void createEvent(String sender, String message) {
 
-		bot.sendMessage("#feufeul_talmie", "Nous allons créer ton événement");
+		bot.sendMessage(channel, "Nous allons créer ton événement");
 		try {
 			Event event = new Event(Utils.stringToDescription(message), Utils.stringToDate(message));
 			if (event.getDate() != null)
 				repoEvent.save(event);
 		} catch (Exception e) {
-			bot.sendMessage("#feufeul_talmie", "@"+sender+ " " + e.getMessage());
-			bot.sendMessage("#feufeul_talmie", "Pour inscrire un nouvel événement, il te faut l'inscrire selon ce modèle : "
+			bot.sendMessage(channel, "@"+sender+ " " + e.getMessage());
+			bot.sendMessage(channel, "Pour inscrire un nouvel événement, il te faut l'inscrire selon ce modèle : "
 					+ "!event (description) yyyy MM dd hh mm ou celui-ci : "
 					+ "!event (description) yyyy MM dd");
 		}
@@ -108,14 +109,18 @@ public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Override
 	public void participateEvent(String sender, String message) {
-		bot.sendMessage("#feufeul_talmie", "Nous prenons en compte votre participation");
+		bot.sendMessage(channel, "Nous prenons en compte votre participation");
 		int id = Utils.stringToParticipation(message);
 		Event event = repoEvent.findOne(id);
 		List<ChatUser> users = event.getUsers();
 		ChatUser user = repoUser.findOne(sender);
-		users.add(user);
-		event.setUsers(users);
-		repoEvent.save(event);
+		if (users.contains(user)) {
+			bot.sendMessage(channel, "Tu participes déjà à cet événement");
+		}else {
+			users.add(user);
+			event.setUsers(users);
+			repoEvent.save(event);
+		}
 	}
 
 	@Override
@@ -135,6 +140,12 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	public void updateEvent(int id, LocalDateTime date, String description) {
 		Event event = new Event(id,date,description);
 		repoEvent.save(event);
+	}
+
+	@Override
+	public List<ChatUser> getParticipants(int id) {
+		
+		return repoEvent.findOne(id).getUsers();
 	}
 	
 	

@@ -1,0 +1,24 @@
+<div layout:fragment="content" layout:decorator="layout">
+
+	
+		<h1> Show Participants </h1>
+		
+		<thead>
+			<tr>
+				<td>name</td>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="participant : ${participants}">
+		
+				<td th:text="${participant.name}"></td>
+
+							
+			</tr>
+		</tbody>
+</div>
+
+	
+		
+ 
