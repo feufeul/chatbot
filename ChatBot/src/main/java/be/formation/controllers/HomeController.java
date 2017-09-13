@@ -4,12 +4,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import be.formation.services.ChatUserServices;
@@ -20,11 +28,29 @@ public class HomeController {
 	@Autowired
 	private ChatUserServices service;
 	
-	@RequestMapping("/login.html")
-	public String login() {
-	    return "login.html";
-	}
 
+	  // Login form
+	  @GetMapping("/login")
+	  public String login() {
+	    return "login";
+	  }
+
+	  // Login form with error
+	  @RequestMapping("/login-error")
+	  public String loginError(Model model) {
+	    model.addAttribute("loginError", true);
+	    return "login?error";
+	  }
+	  
+	  @RequestMapping(value="/logout", method = RequestMethod.GET)
+	  public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      if (auth != null){    
+	          new SecurityContextLogoutHandler().logout(request, response, auth);
+	      }
+	      return "redirect:/login?logout";
+	  }
+	
 	@RequestMapping("/")
 	public String indexPage(@RequestParam(value = "message", required = false, defaultValue = "Welcome") String str,
 			Model model) {
@@ -92,5 +118,10 @@ public class HomeController {
 		return "functions";
 
 	}
+	
+    @GetMapping("/403")
+    public String error403() {
+        return "403";
+    }
 
 }

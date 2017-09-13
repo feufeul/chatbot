@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     xmlns:sec="http://www.springframework.org/security/tags">
 <head>
 <title>Chatbot !</title>
 
@@ -30,28 +31,41 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" th:href="@{/}">ChatBot Configuration</a>
+				<a class="navbar-brand" th:href="@{/home}">ChatBot Configuration</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a th:href="@{/home}">Chatbot</a></li>
 					<li><a th:href="@{/functions}">Functions</a></li>
-					<li><a th:href="@{/}">Page 2</a></li>
 					<li><a th:href="@{/users}">Users and Events</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
+       			<ul class="nav navbar-nav navbar-right">
+      				<li>
+      						<a sec:authorize="isAnonymous()" th:href="@{/login}">
+      						<span class="glyphicon glyphicon-log-in"></span> Login</a>
+      				</li>
+      				<li>
+      					<a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+      					<span class="glyphicon glyphicon-log-out"></span> Logout</a>
+      				</li>
+      				
 
-				</ul>
+      			</ul>
 			</div>
 		</div>
 	</nav>
 
     <div class="container">
         <div class="header">
+    
             <div class="main" layout:fragment="content"></div>
 
         </div>
-        <div class="footer">By Van Duffel C.</div>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+ 			<div class="container">
+ 				<div class="footer">By Van Duffel C.</div>
+ 			</div>
+		</nav>
+        
     </div>
 
 
