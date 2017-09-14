@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import be.formation.domain.ChatBot;
+import be.formation.domain.CommandManager;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -36,6 +37,15 @@ public class AppConfig {
 			e.printStackTrace();
 		}
 		return bot;
+	}
+	
+	@Bean
+	@Scope(value="singleton")
+	public CommandManager cmdManagerFactory() {
+		
+		CommandManager manager = new CommandManager();
+		return manager;
+		
 	}
 
 

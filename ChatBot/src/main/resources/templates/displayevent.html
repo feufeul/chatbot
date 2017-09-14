@@ -8,11 +8,13 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
+							<td>N°</td>
 							<td>Name</td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="participant : ${participants}">
+						<tr th:each="participant, iter : ${participants}">
+							<td th:text="${iter.index +1}"></td>
 							<td th:text="${participant.name}"></td>
 						</tr>
 					</tbody>

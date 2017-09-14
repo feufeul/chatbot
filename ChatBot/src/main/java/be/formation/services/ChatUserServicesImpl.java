@@ -109,7 +109,6 @@ public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Override
 	public void participateEvent(String sender, String message) {
-		bot.sendMessage(channel, "Nous prenons en compte votre participation");
 		int id = Utils.stringToParticipation(message);
 		Event event = repoEvent.findOne(id);
 		if (event != null) {
@@ -121,6 +120,8 @@ public class ChatUserServicesImpl implements ChatUserServices {
 				users.add(user);
 				event.setUsers(users);
 				repoEvent.save(event);
+				bot.sendMessage(channel, "Tu es désormais inscrit à cet événement !");
+
 			}
 		}else {
 			bot.sendMessage(channel, "Cet événement n'existe pas..");
