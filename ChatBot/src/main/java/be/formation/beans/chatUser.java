@@ -35,7 +35,6 @@ public class ChatUser{
 	 * @param name used by chatter
 	 */
 	public ChatUser(String name) {
-
 		this.name =name;
 		this.messagesSent=1;
 		this.isModerator=false;

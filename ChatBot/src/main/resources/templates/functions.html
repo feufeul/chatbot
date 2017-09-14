@@ -1,10 +1,54 @@
 <div layout:fragment="content" layout:decorator="layout">
 
-	<div class="container">
-	
-	<h1> Les fonctions sont à venir </h1>
+<div class="container">
 
-
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h1>Liste des Fonctions</h1>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<td>Fonction</td>
+							<td>Disponibilité</td>
+							<td><span class="glyphicon glyphicon-cog"></span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="function : ${functions}">
+							<td th:text="${function.name}"></td>
+							<td>
+								<span th:switch="${function.isActive}">
+									<span th:case="true">Actif</span>
+									<span th:case="false">Inactif</span>
+								</span>
+							</td>
+							<td>
+							
+							<!--  Here we check the boolean on Moderator so we can display the present value of the moderator / chatter -->
+								<form th:action="@{/switchFunction/{id}(id=${function.name})}" method="post">
+																							
+								<span th:switch="${function.isActive}">
+									<button th:case="false" class="btn btn-success" onclick="toggleOn()"> ON </button>
+									<button th:case="true" class="btn btn-danger" onclick="toggleOff()">OFF </button>
+								</span>
+									<script>
+										function toggleOn() {
+											$('#toggle-trigger')
+													.bootstrapToggle('on')
+										}
+										function toggleOff() {
+											$('#toggle-trigger')
+													.bootstrapToggle('off')
+										}
+									</script>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-
 </div>

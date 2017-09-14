@@ -19,14 +19,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import be.formation.beans.ChatUser;
 import be.formation.services.ChatUserServices;
+import be.formation.services.FunctionServices;
 
 @Controller
 public class HomeController {
 
 	@Autowired
 	private ChatUserServices service;
+	@Autowired
+	private FunctionServices fctService;
 
 	// Login form
 	@GetMapping("/login")
@@ -61,6 +63,7 @@ public class HomeController {
 	public String homePage(Model model) {
 		return "home";
 	}
+	
 
 	@RequestMapping("/users")
 	public String usersPage(@RequestParam(value = "message", required = false, defaultValue = "Welcome") String str,
@@ -88,16 +91,13 @@ public class HomeController {
 
 	@PostMapping("/deleteEvent/{id}")
 	public String deleteEvent(@PathVariable int id) {
-
 		service.deleteEvent(service.findOneEvent(id));
-
 		return "redirect:/users";
 	}
 
 	@PostMapping("/modifyEvent/")
 	public String modifyEvent(@RequestParam(value = "id") int id, @RequestParam(value = "date") String dateStr,
 			@RequestParam(value = "description") String description) {
-
 		String[] strList = dateStr.split(" ");
 		List<Integer> intList = new ArrayList<>();
 		for (String s : strList) {
@@ -106,23 +106,26 @@ public class HomeController {
 		service.updateEvent(id,
 				LocalDateTime.of(intList.get(0), intList.get(1), intList.get(2), intList.get(3), intList.get(4)),
 				description);
-
 		return "redirect:/users";
 	}
 	
 	@PostMapping("/displayEvent/{id}")
 	public String displayEvent(@PathVariable int id, Model model) {
-		
 		model.addAttribute("participants", service.getParticipants(id));
 		return "displayevent";
+	}
+	
+	@PostMapping("/switchFunction/{id}")
+	public String switchEvent(@PathVariable(value="id") String id) {
+		fctService.switchEnable(id);
+		return "redirect:/functions";
 	}
 
 	@RequestMapping("/functions")
 	public String functionsPage(@RequestParam(value = "message", required = false, defaultValue = "Welcome") String str,
 			Model model) {
-
+		model.addAttribute("functions", fctService.findAll());
 		return "functions";
-
 	}
 
 	@GetMapping("/403")

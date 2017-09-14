@@ -85,7 +85,6 @@
 								<div class="btn-group">
 								
 									<!-- Facade Action button -->
-									
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> Action <span class="caret"></span>
 									</button>
@@ -93,7 +92,6 @@
 									<div class="dropdown-menu">
 
 										<!-- Edit Button -->
-										
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Edit"
 											name="Edit">Edit</button>
 											
@@ -101,18 +99,13 @@
 										<form th:action="@{/displayEvent/{id}(id=${event.id})}"  method="post">
 											<button type="submit" name="Display" value="Display" class="btn btn-primary">Display Participants</button>
 										</form>
-											
 						
 										<!-- Delete Button -->
-											
 										<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
 
 											<button type="submit" name="Delete" value="Delete"
 												class="btn btn-primary">Delete</button>
 										</form>
-										
-
-										
 									</div>
 								</div>
 							</td>

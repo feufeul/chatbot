@@ -1,0 +1,23 @@
+<div layout:fragment="content" layout:decorator="layout">
+	<div class="container">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h1>Liste des Participants</h1>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<td>Name</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="participant : ${participants}">
+							<td th:text="${participant.name}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

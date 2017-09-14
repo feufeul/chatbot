@@ -3,9 +3,9 @@ package be.formation.services;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-
 import be.formation.beans.ChatUser;
 import be.formation.beans.Event;
 import be.formation.domain.ChatBot;
@@ -17,7 +17,8 @@ import be.formation.utils.Utils;
 @PropertySource("classpath:application.properties")
 public class ChatUserServicesImpl implements ChatUserServices {
 
-	private String channel = "#feufeul_talmie";
+	@Value("${chatbot.channelName}")
+	private String channel;
 	@Autowired
 	private ChatBot bot;
 	@Autowired
@@ -87,10 +88,9 @@ public class ChatUserServicesImpl implements ChatUserServices {
 			if (event.getDate() != null)
 				repoEvent.save(event);
 		} catch (Exception e) {
-			bot.sendMessage(channel, "@"+sender+ " " + e.getMessage());
+			bot.sendMessage(channel, "@" + sender + " " + e.getMessage());
 			bot.sendMessage(channel, "Pour inscrire un nouvel événement, il te faut l'inscrire selon ce modèle : "
-					+ "!event (description) yyyy MM dd hh mm ou celui-ci : "
-					+ "!event (description) yyyy MM dd");
+					+ "!event (description) yyyy MM dd hh mm ou celui-ci : " + "!event (description) yyyy MM dd");
 		}
 
 	}
@@ -112,14 +112,18 @@ public class ChatUserServicesImpl implements ChatUserServices {
 		bot.sendMessage(channel, "Nous prenons en compte votre participation");
 		int id = Utils.stringToParticipation(message);
 		Event event = repoEvent.findOne(id);
-		List<ChatUser> users = event.getUsers();
-		ChatUser user = repoUser.findOne(sender);
-		if (users.contains(user)) {
-			bot.sendMessage(channel, "Tu participes déjà à cet événement");
+		if (event != null) {
+			List<ChatUser> users = event.getUsers();
+			ChatUser user = repoUser.findOne(sender);
+			if (users.contains(user)) {
+				bot.sendMessage(channel, "Tu participes déjà à cet événement");
+			} else {
+				users.add(user);
+				event.setUsers(users);
+				repoEvent.save(event);
+			}
 		}else {
-			users.add(user);
-			event.setUsers(users);
-			repoEvent.save(event);
+			bot.sendMessage(channel, "Cet événement n'existe pas..");
 		}
 	}
 
@@ -138,16 +142,14 @@ public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Override
 	public void updateEvent(int id, LocalDateTime date, String description) {
-		Event event = new Event(id,date,description);
+		Event event = new Event(id, date, description);
 		repoEvent.save(event);
 	}
 
 	@Override
 	public List<ChatUser> getParticipants(int id) {
-		
+
 		return repoEvent.findOne(id).getUsers();
 	}
-	
-	
 
 }

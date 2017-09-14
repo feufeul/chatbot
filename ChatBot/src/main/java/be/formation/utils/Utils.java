@@ -39,10 +39,8 @@ public class Utils {
 	}
 
 	/**
-	 * A method who truncate the message, so only the parameters are retrieved
-	 * 
-	 * @param message
-	 *            to redirect to the right function
+	 * A method which truncate the message, so only the parameters are retrieved
+	 * @param message to redirect to the right function
 	 */
 	public static Object startsWith(String message) throws Exception {
 		String starter = message.split(" ")[0];
@@ -62,9 +60,7 @@ public class Utils {
 
 	/**
 	 * A method validating and transforming a string into date
-	 * 
-	 * @param message
-	 *            without the !participate
+	 * @param message without the !participate
 	 * @return [regex]!event (description) yyyy MM dd hh mm
 	 */
 	public static LocalDateTime stringToDate(String message) throws Exception {
@@ -109,7 +105,6 @@ public class Utils {
 
 	/**
 	 * Look for the description in a message
-	 * 
 	 * @param message
 	 * @return
 	 */
@@ -134,9 +129,7 @@ public class Utils {
 	}
 
 	/**
-	 * 
-	 * @param [regex]!participate
-	 *            id
+	 * @param [regex]!participate id
 	 */
 	public static int stringToParticipation(String message) {
 
