@@ -89,7 +89,7 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", date=" + date + ", description=" + description + ", users=" + users + "]";
+		return "Event [id=" + id + ", date=" + date + ", description=" + description +"]";
 	}
 
 	

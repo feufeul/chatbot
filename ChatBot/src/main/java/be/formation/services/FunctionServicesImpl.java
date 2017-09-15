@@ -35,4 +35,9 @@ public class FunctionServicesImpl implements FunctionServices {
 	public List<Function> findAllActive(boolean isActive) {
 		return repo.findByIsActive(true);
 	}
+
+	@Override
+	public void createFunction(String str) {
+		repo.save(new Function(str));
+	}
 }

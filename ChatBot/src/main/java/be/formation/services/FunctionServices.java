@@ -12,4 +12,6 @@ public interface FunctionServices {
 	public void switchEnable(String str);
 	
 	public List<Function> findAllActive(boolean isActive);
+	
+	public void createFunction(String str);
 }

@@ -9,12 +9,15 @@ import be.formation.beans.ChatUser;
 import be.formation.beans.Function;
 import be.formation.services.ChatUserServices;
 import be.formation.services.FunctionServices;
+import be.formation.services.MessageServices;
 
 @PropertySource("classpath:application.properties")
 public class ChatBot extends PircBot {
 
 	@Value("${chatbot.channelName}")
 	private String channel;
+	@Autowired
+	private MessageServices msgServices;
 	@Autowired
 	private ChatUserServices services;
 	@Autowired
@@ -29,15 +32,31 @@ public class ChatBot extends PircBot {
 
 	@Override
 	protected void onMessage(String channel, String sender, String login, String hostname, String message) {
+		//TODO I have to use external Utils to upgrade the modularity
 		ChatUser usr = updateMessageUser(sender);
+		msgServices.createMessage(message, usr);
 		String cmd = message.split(" ")[0];
-		if(cmd.startsWith("!")) {
-			if(fctServices.findAllActive(true).contains(new Function(cmd))) {
+		if (cmd.startsWith("!")) {
+			if (cmd.equals("!cmd")) {
+				// The only admin here that's enabled to custo command
+				if (usr.getName().equals("feufeul_talmie")) {
+					// Take the first argument of the message to be a command
+					if (message.split(" ")[1].startsWith("!")) {
+						fctServices.createFunction(message.split(" ")[1]);
+					}
+				}
+			}
+			if (fctServices.findAllActive(true).contains(new Function(cmd))) {
 				commandSwitcher(usr, message);
 			}
 		}
 	}
-	
+
+	/**
+	 * Update db with new Chatter or new message
+	 * @param sender
+	 * @return
+	 */
 	private ChatUser updateMessageUser(String sender) {
 		ChatUser usr = services.findOneUser(sender);
 		if (usr == null) {
@@ -46,24 +65,31 @@ public class ChatBot extends PircBot {
 			services.incrMessagesSent(usr);
 		}
 		return usr;
-		
+
 	}
-	
+
+	/**
+	 * The controller which can redirect to the right method
+	 * @param usr, the sender of the message
+	 * @param message, the message sent
+	 */
 	private void commandSwitcher(ChatUser usr, String message) {
-		
+
 		String cmd = message.split(" ")[0];
-		switch( cmd){
+		switch (cmd) {
 		case "!event":
 			cmdManager.cmdEvent(usr, message);
 			break;
 		case "!participate":
 			cmdManager.cmdParticipate(usr, message);
 			break;
-			
+		case "!eventlist":
+			cmdManager.cmdEventList();
+			break;
+
 		default:
 			break;
 		}
 	}
-	
-	
+
 }

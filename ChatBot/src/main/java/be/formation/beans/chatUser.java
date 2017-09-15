@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -26,6 +27,8 @@ public class ChatUser{
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "event_chatuser", joinColumns = @JoinColumn(name = "chatuser_name"), inverseJoinColumns = @JoinColumn(name="event_id"))
 	private List<Event> events;
+	@OneToMany(mappedBy="user")
+	private List<Message> messages;
 	
 	ChatUser(){
 	}

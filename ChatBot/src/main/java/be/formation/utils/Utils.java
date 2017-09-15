@@ -18,10 +18,16 @@ public class Utils {
 	/**
 	 * regex yyyy MM dd
 	 */
-	private static final String PATTERN_WITHOUT_DESC_AND_HOURS = "(\\d+)([ ])(\\d+)([ ])(\\d+)";/**
+	private static final String PATTERN_WITHOUT_DESC_AND_HOURS = "(\\d+)([ ])(\\d+)([ ])(\\d+)";
+	/**
 	 * regex yyyy MM dd hh mm
 	 */
 	private static final String PATTERN_WITHOUT_DESC = "(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
+	/**
+	 * regex !word
+	 */
+	private static final String PATTERN_CMD = "([!]([a-zA-Z_0-9])";
+	
 	
 
 	/**
@@ -51,11 +57,21 @@ public class Utils {
 			return stringToDate(message.replaceFirst("!event ", ""));
 		case "!participate":
 			return stringToParticipation(message.replaceFirst("!participate ", ""));
+		case "!cmd":
+			return stringToCommand(message.replaceFirst("!cmd", ""));
 		default:
 			System.out.println("Mauvaise écriture.");
 			return null;
 
 		}
+	}
+	
+	public static String stringToCommand(String msg) {
+		Matcher m = regexResolve(msg, PATTERN_CMD);
+		if(m.find()) {
+			return m.group(0);
+		}
+		return null;
 	}
 
 	/**
@@ -68,7 +84,6 @@ public class Utils {
 		Matcher m = regexResolve(message, PATTERN_WITH_HOURS);
 
 		if (m.groupCount() > 11 && m.find()) {
-			System.out.println("pattern avec heures");
 			try {
 				LocalDateTime date = LocalDateTime.of(Integer.parseInt(m.group(5)), Integer.parseInt(m.group(7)),
 						Integer.parseInt(m.group(9)), Integer.parseInt(m.group(11)), Integer.parseInt(m.group(13)));
@@ -85,7 +100,6 @@ public class Utils {
 			m = regexResolve(message, PATTERN_WITHOUT_HOURS);
 
 			if (m.find()) {
-				System.out.println("pattern sans heures");
 				try {
 					LocalDateTime date = LocalDateTime.of(Integer.parseInt(m.group(5)), Integer.parseInt(m.group(7)),
 							Integer.parseInt(m.group(9)), 8, 0);
