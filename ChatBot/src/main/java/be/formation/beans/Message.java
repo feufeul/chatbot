@@ -2,7 +2,6 @@ package be.formation.beans;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -73,7 +72,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", date=" + date + ", message=" + message + ", user=" + user + "]";
+		return date + " : " +user + " : "+ message; 
 	}
 	
 	

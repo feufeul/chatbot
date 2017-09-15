@@ -12,7 +12,7 @@
 						<tr>
 							<td>Fonction</td>
 							<td>Disponibilité</td>
-							<td><span class="glyphicon glyphicon-cog"></span></td>
+							<td  width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,8 +30,8 @@
 								<form th:action="@{/switchFunction/{id}(id=${function.name})}" method="post">
 																							
 								<span th:switch="${function.isActive}">
-									<button th:case="false" class="btn btn-success" onclick="toggleOn()"> ON </button>
-									<button th:case="true" class="btn btn-danger" onclick="toggleOff()">OFF </button>
+									<button style="width:75px;" th:case="false" class="btn btn-success" onclick="toggleOn()"> ON </button>
+									<button style="width:75px;"  th:case="true" class="btn btn-danger" onclick="toggleOff()">OFF </button>
 								</span>
 									<script>
 										function toggleOn() {

@@ -26,7 +26,8 @@
 
 
 </head>
-<body>
+<body style="padding:10px;
+   padding-bottom:100px;   /* Height of the footer */">
 
 
 	<nav class="navbar navbar-inverse">
@@ -43,6 +44,7 @@
 				<ul class="nav navbar-nav">
 					<li><a th:href="@{/functions}">Functions</a></li>
 					<li><a th:href="@{/users}">Users and Events</a></li>
+					<li><a th:href="@{/chathistory}">Chat History</a></li>
 				</ul>
        			<ul class="nav navbar-nav navbar-right">
       				<li>
@@ -65,7 +67,9 @@
             <div class="main" layout:fragment="content"></div>
         </div>
         <nav class="navbar navbar-default navbar-fixed-bottom">
- 			<div class="container">
+ 			<div style="   
+ 			height:10px;   /* Height of the footer */"
+ 			id="footer" class="container">
  				<div class="footer" align="right">By Van Duffel C.</div>
  			</div>
 		</nav>

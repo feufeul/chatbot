@@ -11,46 +11,54 @@
 						<tr>
 							<td>Name</td>
 							<td>Messages sent</td>
-							<td>Moderator</td>
-							<td><span class="glyphicon glyphicon-cog"></span></td>
+							<td width="150px">Chat Status</td>
+							<td width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="user : ${users}">
-							<td th:text="${user.name}">test</td>
-							<td th:text="${user.messagesSent}">0</td>
-							<td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.messagesSent}"></td>
+							<td >
 								<div class="btn-group">
+									
 									<!--  Here we check the boolean on Moderator so we can display the present value of the moderator / chatter -->
-									<button type="button" class="btn btn-primary">
+
 										<span th:switch="${user.isModerator}">
-										 <span th:case="true">Moderator</span>
-										 <span th:case="false">Chatter</span>
+										 	<span th:case="true">Moderator</span>
+											<span th:case="false">Chatter</span>
 										</span>
-									</button>
-									
-									<!-- Expanded button for changing Chatter <-> Moderator -->
-									
-									<button type="button" id="dropdownMenu"
-										class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										<span class="caret"></span>
-									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenu">
+										
 										<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
 											<button class="dropdown-item" type="submit" name="user"
-												value="chatter" class="btn btn-primary">Chatter</button>
+												value="chatter" class="btn btn-primary btn-block">Chatter</button>
 											<button class="dropdown-item" type="submit" name="user"
-												value="mod" class="btn btn-primary">Moderator</button>
+												value="mod" class="btn btn-primary btn-block">Moderator</button>
 										</form>
 									</div>
 								</div>
 							</td>
 							<td>
-								<form th:action="@{/deleteUser/{id}(id=${user.name})}"
-									method="post">
-									<button type="submit" value="Submit" class="btn btn-primary">Delete</button>
-								</form>
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false"> Action <span class="caret"></span>
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenu" id="dropdownmenu">
+
+									<form th:action="@{/deleteUser/{id}(id=${user.name})}" method="post">
+										<button type="submit" value="Submit" class="btn btn-primary btn-block">Delete</button>
+									</form>
+									<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
+										<span th:switch="${user.isModerator}">
+											<button th:case="true" class="dropdown-item" type="submit" name="user"
+												value="chatter" class="btn btn-primary btn-block"> Set as Chatter</button>
+											<button th:case="false" class="dropdown-item" type="submit" name="user"
+												value="mod" class="btn btn-primary btn-block">Set as Moderator</button>
+										</span>
+									</form>
+								</div>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -70,8 +78,8 @@
 							<td>ID</td>
 							<td>Date</td>
 							<td>Description</td>
-							<td>Total participants</td>
-							<td><span class="glyphicon glyphicon-cog"></span></td>
+							<td width="150px">Total participants</td>
+							<td width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,19 +100,19 @@
 									<div class="dropdown-menu">
 
 										<!-- Edit Button -->
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Edit"
+										<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" value="Edit"
 											name="Edit">Edit</button>
 											
 										<!-- DisplayList Button -->
 										<form th:action="@{/displayEvent/{id}(id=${event.id})}"  method="post">
-											<button type="submit" name="Display" value="Display" class="btn btn-primary">Display Participants</button>
+											<button type="submit" name="Display" value="Display" class="btn btn-primary btn-block">Display Participants</button>
 										</form>
 						
 										<!-- Delete Button -->
 										<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
 
 											<button type="submit" name="Delete" value="Delete"
-												class="btn btn-primary">Delete</button>
+												class="btn btn-primary btn-block">Delete</button>
 										</form>
 									</div>
 								</div>
@@ -116,12 +124,7 @@
 		</div>
 	</div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 			<!-- Modal -->
 									
 <div id="myModal" class="modal fade" tabindex="-1"
@@ -143,15 +146,15 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="id" class="control-label">id:</label>
-						<input type="number" class="form-control" id="recipient-name" name="id">
+						<input type="number" class="form-control" id="recipient-name" name="id" placeholder="12">
 					</div>
 					<div class="form-group">
 						<label for="recipient-name" class="control-label">Date:</label>
-						<input type="datetime-local" class="form-control" id="recipient-name" name="date">
+						<input type="datetime-local" class="form-control" id="recipient-name" name="date" placeholder="2020 19 12 15 00">
 					</div>
 					<div class="form-group">
 						<label for="message-text" class="control-label">Description:</label>
-						<textarea class="form-control" id="message-text" name="description"></textarea>
+						<textarea class="form-control" id="message-text" name="description" placeholder="Réunion commerciale"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">

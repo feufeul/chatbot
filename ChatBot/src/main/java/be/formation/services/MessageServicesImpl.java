@@ -1,5 +1,7 @@
 package be.formation.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,13 @@ public class MessageServicesImpl implements MessageServices {
 		
 		repo.save(new Message(str, usr));
 		
+	}
+
+	@Override
+	public List<Message> showHistory() {
+
+		return repo.findAll();
+	
 	}
 
 }
