@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import be.formation.beans.ChatUser;
 import be.formation.beans.Event;
+import be.formation.beans.Function;
 import be.formation.services.ChatUserServices;
 import be.formation.services.FunctionServices;
 
@@ -29,7 +30,6 @@ public class CommandManager {
 	public void cmdEvent(ChatUser usr, String message) {
 		if (usr.getIsModerator()) {
 			services.createEvent(usr.getName(), message);
-			bot.sendMessage(channel, "Ton événement a bien été créé");
 		} else
 			bot.sendMessage(channel, "Cette commande n'est pas pour toi !");
 	}
@@ -47,5 +47,10 @@ public class CommandManager {
 
 	public void cmdCmd(ChatUser usr, String message) {
 		fctServices.createFunction(message);
+	}
+
+	public void cmdCmdList() {
+		List<Function> fctList = fctServices.findAllActive(true);
+		fctList.forEach(f -> bot.sendMessage(channel, f.toString()));
 	}
 }

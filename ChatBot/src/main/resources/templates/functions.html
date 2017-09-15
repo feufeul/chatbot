@@ -11,6 +11,7 @@
 					<thead>
 						<tr>
 							<td>Fonction</td>
+							<td>Description</td>
 							<td>Disponibilité</td>
 							<td  width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
@@ -18,10 +19,11 @@
 					<tbody>
 						<tr th:each="function : ${functions}">
 							<td th:text="${function.name}"></td>
+							<td th:text="${function.description}"> </td>
 							<td>
 								<span th:switch="${function.isActive}">
-									<span th:case="true">Actif</span>
-									<span th:case="false">Inactif</span>
+									<span style="color: green;" th:case="true">Actif</span>
+									<span style="color: red;" th:case="false">Inactif</span>
 								</span>
 							</td>
 							<td>

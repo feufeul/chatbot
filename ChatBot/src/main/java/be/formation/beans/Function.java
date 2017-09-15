@@ -10,12 +10,20 @@ public class Function {
 
 	@Id
 	private String name;
+	private String description="Description à pouvoir";
 	private boolean isActive;
 	
 	public Function() {
-		
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
@@ -23,7 +31,7 @@ public class Function {
 	public Function(String name) {
 		super();
 		this.name=name;
-		this.isActive = true;
+		this.isActive = false;
 	}
 
 	public Function(String name, boolean isActive) {
@@ -55,7 +63,7 @@ public class Function {
 
 	@Override
 	public String toString() {
-		return "Function [name=" + name + ", isActive=" + isActive + "]";
+		return name +", "+description+". ";
 	}
 
 	@Override

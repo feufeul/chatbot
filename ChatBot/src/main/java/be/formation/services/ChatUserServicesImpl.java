@@ -85,8 +85,10 @@ public class ChatUserServicesImpl implements ChatUserServices {
 		bot.sendMessage(channel, "Nous allons créer ton événement");
 		try {
 			Event event = new Event(Utils.stringToDescription(message), Utils.stringToDate(message));
-			if (event.getDate() != null)
+			if (event.getDate() != null) {
 				repoEvent.save(event);
+				bot.sendMessage(channel, "Ton événement a bien été créé");
+			}
 		} catch (Exception e) {
 			bot.sendMessage(channel, "@" + sender + " " + e.getMessage());
 			bot.sendMessage(channel, "Pour inscrire un nouvel événement, il te faut l'inscrire selon ce modèle : "
@@ -123,7 +125,7 @@ public class ChatUserServicesImpl implements ChatUserServices {
 				bot.sendMessage(channel, "Tu es désormais inscrit à cet événement !");
 
 			}
-		}else {
+		} else {
 			bot.sendMessage(channel, "Cet événement n'existe pas..");
 		}
 	}

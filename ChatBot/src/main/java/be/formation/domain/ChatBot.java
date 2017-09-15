@@ -14,6 +14,8 @@ import be.formation.services.MessageServices;
 @PropertySource("classpath:application.properties")
 public class ChatBot extends PircBot {
 
+	@Value("${chatbot.superadmin}")
+	private String superadmin;
 	@Value("${chatbot.channelName}")
 	private String channel;
 	@Autowired
@@ -39,7 +41,7 @@ public class ChatBot extends PircBot {
 		if (cmd.startsWith("!")) {
 			if (cmd.equals("!cmd")) {
 				// The only admin here that's enabled to custo command
-				if (usr.getName().equals("feufeul_talmie")) {
+				if (usr.getName().equals(superadmin)) {
 					// Take the first argument of the message to be a command
 					if (message.split(" ")[1].startsWith("!")) {
 						fctServices.createFunction(message.split(" ")[1]);
@@ -85,6 +87,9 @@ public class ChatBot extends PircBot {
 			break;
 		case "!eventlist":
 			cmdManager.cmdEventList();
+			break;
+		case "!cmdlist":
+			cmdManager.cmdCmdList();
 			break;
 
 		default:
