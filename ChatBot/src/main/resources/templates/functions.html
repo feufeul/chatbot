@@ -10,16 +10,18 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<td>Fonction</td>
-							<td>Description</td>
-							<td>Disponibilité</td>
-							<td  width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
+							<td>Function</td>
+							<td>Signature </td>
+							<td>Short description</td>
+							<td>Disponibility</td>
+							<td  width="110px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="function : ${functions}">
 							<td th:text="${function.name}"></td>
-							<td th:text="${function.description}"> </td>
+							<td th:text="${function.signature}"></td>
+							<td th:text="${function.shortDescription}"> </td>
 							<td>
 								<span th:switch="${function.isActive}">
 									<span style="color: green;" th:case="true">Actif</span>
@@ -30,27 +32,70 @@
 							
 							<!--  Here we check the boolean on Moderator so we can display the present value of the moderator / chatter -->
 								<form th:action="@{/switchFunction/{id}(id=${function.name})}" method="post">
-																							
-								<span th:switch="${function.isActive}">
-									<button style="width:75px;" th:case="false" class="btn btn-success" onclick="toggleOn()"> ON </button>
-									<button style="width:75px;"  th:case="true" class="btn btn-danger" onclick="toggleOff()">OFF </button>
-								</span>
-									<script>
-										function toggleOn() {
-											$('#toggle-trigger')
-													.bootstrapToggle('on')
-										}
-										function toggleOff() {
-											$('#toggle-trigger')
-													.bootstrapToggle('off')
-										}
-									</script>
+
+									<span th:switch="${function.isActive}">
+										<button style="width:75px;" th:case="false" class="btn btn-success" onclick="toggleOn()"> ON </button>
+										<button style="width:75px;" th:case="true"  class="btn btn-danger active"  onclick="toggleOff()">OFF</button>
+									</span>
 								</form>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+			<!-- Edit Button -->
+			<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal2" value="Edit"
+						name="Edit">Edit</button>
+
+			<!-- Modal -->
+									
+<div id="myModal2" class="modal fade" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+
+			<!-- Modal content-->
+											
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
+			<form id="edit-form" th:action="@{/modifyFunction/}" method="POST" name="editform">
+	
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="function" class="control-label">function:</label>
+						<input type="text" class="form-control" id="recipient-name" name="function" placeholder="!cmdlist">
+					</div>
+					<div class="form-group">
+						<label for="isActive" class="control-label">IsActive:</label>
+						<input type="checkbox" class="form-control" id="isActive" name="isActive">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="control-label">Description:</label>
+						<textarea class="form-control" id="message-text" name="description" placeholder="Cette commande permet de lister les commandes actives"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="control-label">Signature:</label>
+						<textarea class="form-control" id="message-text" name="signature" placeholder="!cmdlist"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" name="Update" value="Update" class="btn btn-primary">Send modifications</button>
+				</div>
+			</form>
+	
+	</div>
+
+
 	</div>
 </div>
+</div>
+		</div>
+	</div>
+
+	

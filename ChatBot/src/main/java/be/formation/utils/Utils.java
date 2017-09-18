@@ -18,11 +18,11 @@ public class Utils {
 	/**
 	 * regex yyyy MM dd
 	 */
-	private static final String PATTERN_WITHOUT_DESC_AND_HOURS = "(\\d+)([ ])(\\d+)([ ])(\\d+)";
+//	private static final String PATTERN_WITHOUT_DESC_AND_HOURS = "(\\d+)([ ])(\\d+)([ ])(\\d+)";
 	/**
 	 * regex yyyy MM dd hh mm
 	 */
-	private static final String PATTERN_WITHOUT_DESC = "(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
+//	private static final String PATTERN_WITHOUT_DESC = "(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)([ ])(\\d+)";
 	/**
 	 * regex !word
 	 */

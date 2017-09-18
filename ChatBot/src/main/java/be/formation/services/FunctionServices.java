@@ -14,4 +14,6 @@ public interface FunctionServices {
 	public List<Function> findAllActive(boolean isActive);
 	
 	public void createFunction(String str);
+	
+	public void editFunction(String name, boolean isActive, String description, String signature);
 }

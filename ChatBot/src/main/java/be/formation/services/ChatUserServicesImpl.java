@@ -99,9 +99,7 @@ public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Override
 	public Event findOneEvent(int id) {
-
 		return repoEvent.findOne(id);
-
 	}
 
 	@Override
@@ -123,7 +121,6 @@ public class ChatUserServicesImpl implements ChatUserServices {
 				event.setUsers(users);
 				repoEvent.save(event);
 				bot.sendMessage(channel, "Tu es désormais inscrit à cet événement !");
-
 			}
 		} else {
 			bot.sendMessage(channel, "Cet événement n'existe pas..");
@@ -132,15 +129,12 @@ public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Override
 	public void deleteUser(ChatUser usr) {
-
 		repoUser.delete(usr);
 	}
 
 	@Override
 	public void deleteEvent(Event event) {
-
 		repoEvent.delete(event);
-
 	}
 
 	@Override
@@ -151,7 +145,6 @@ public class ChatUserServicesImpl implements ChatUserServices {
 
 	@Override
 	public List<ChatUser> getParticipants(int id) {
-
 		return repoEvent.findOne(id).getUsers();
 	}
 

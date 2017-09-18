@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="page" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="page"/>
+			<item value="longDescription"/>
 			<item value="timestamp"/>
 			<item value="web"/>
 			<item value="security"/>
@@ -23,6 +25,7 @@
 			<item value="messageSent"/>
 		</list>
 		<list key="replacehistory">
+			<item value="signature"/>
 			<item value="LocalDate"/>
 			<item value="ChatUser"/>
 			<item value="messagesSent"/>

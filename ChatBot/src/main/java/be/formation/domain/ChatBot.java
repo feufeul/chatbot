@@ -91,7 +91,9 @@ public class ChatBot extends PircBot {
 		case "!cmdlist":
 			cmdManager.cmdCmdList();
 			break;
-
+		case "!man":
+			cmdManager.cmdMan(message);
+			break;
 		default:
 			break;
 		}

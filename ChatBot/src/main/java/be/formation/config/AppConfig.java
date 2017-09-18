@@ -21,6 +21,7 @@ public class AppConfig {
 	@Value("${chatbot.channelName}")
 	private String channelName;
 	
+	
 	@Bean
 	@Scope(value="singleton")
 	public ChatBot chatBot() {
@@ -47,6 +48,5 @@ public class AppConfig {
 		return manager;
 		
 	}
-
 
 }

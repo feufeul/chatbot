@@ -26,6 +26,17 @@ public class CommandManager {
 	public CommandManager() {
 
 	}
+	
+	public void cmdMan(String message) {
+		try {
+			String cmdSeeked = message.split(" ")[1];
+			Function f = fctServices.findOne(cmdSeeked);
+			bot.sendMessage(channel, cmdSeeked + " : " + f.getShortDescription());
+		}catch(Exception e) {
+			bot.sendMessage(channel, "Mauvaise signature de commande");
+		}
+
+	}
 
 	public void cmdEvent(ChatUser usr, String message) {
 		if (usr.getIsModerator()) {

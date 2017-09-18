@@ -10,18 +10,37 @@ public class Function {
 
 	@Id
 	private String name;
-	private String description="Description à pouvoir";
+	private String shortDescription="Description à pourvoir";
+	private String signature="!cmd_to_write arg0 arg1 ( for example )";
 	private boolean isActive;
 	
 	public Function() {
 	}
 	
-	public String getDescription() {
-		return description;
+	
+	public Function(String name, String shortDescription, String signature, boolean isActive) {
+		super();
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.signature = signature;
+		this.isActive = isActive;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+	
+	public void setShortDescription(String description) {
+		this.shortDescription = description;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 	public void setActive(boolean isActive) {
@@ -63,7 +82,7 @@ public class Function {
 
 	@Override
 	public String toString() {
-		return name +", "+description+". ";
+		return name +", "+shortDescription+". ";
 	}
 
 	@Override

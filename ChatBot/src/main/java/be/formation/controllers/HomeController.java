@@ -3,21 +3,25 @@ package be.formation.controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import be.formation.beans.Message;
 import be.formation.services.ChatUserServices;
 import be.formation.services.FunctionServices;
@@ -117,9 +121,22 @@ public class HomeController {
 		return "redirect:/functions";
 	}
 	
+	@PostMapping("/modifyFunction")
+	public String modifyFunction(@RequestParam(value = "function") String function,
+			@RequestParam(value = "isActive", required=false) boolean isActive,
+			@RequestParam(value = "description") String description,
+			@RequestParam(value = "signature") String signature) {
+		if(fctService.findOne(function)!=null) {
+			fctService.editFunction(function, isActive, description, signature);
+		}
+		return "redirect:/functions";
+	}
+	
 	@RequestMapping("/chathistory")
 	public String chathistory(Model model) {
-		model.addAttribute("chathistory", msgServices.showHistory());
+		// Paginate the different messages
+		Page<Message> messages = msgServices.displayAll(new PageRequest(1, 20));
+		model.addAttribute("chathistory", messages);
 		return "chathistory";
 	}
 

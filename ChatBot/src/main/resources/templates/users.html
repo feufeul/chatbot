@@ -1,9 +1,8 @@
 <div layout:fragment="content" layout:decorator="layout">
 	<div class="container">
-		<h1>Liste de tous les Users</h1>
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<div>Liste des Users</div>
+				<div>User list</div>
 			</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
@@ -66,19 +65,18 @@
 			</div>
 		</div>
 
-		<h1>Liste de tous les Events</h1>
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<div>Liste des Events</div>
+				<div>Event list</div>
 			</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<td>ID</td>
-							<td>Date</td>
+							<td width="50px">ID</td>
+							<td width="155px">Date</td>
 							<td>Description</td>
-							<td width="150px">Total participants</td>
+							<td width="50px">Participants</td>
 							<td width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
@@ -87,7 +85,7 @@
 						<tr th:each="event : ${events}">
 							<td th:text="${event.id}">001</td>
 							<td th:text="${event.date}">2000/02/01</td>
-							<td th:text="${event.description}">Description basique <span><button>test</button></span></td>
+							<td th:text="${event.description}">Basic description</td>
 							<td th:text="${#lists.size(event.users)}"></td>
 							<td>
 								<div class="btn-group">
@@ -100,7 +98,7 @@
 									<div class="dropdown-menu">
 
 										<!-- Edit Button -->
-										<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" value="Edit"
+										<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" data-id="${event.id}" value="Edit"
 											name="Edit">Edit</button>
 											
 										<!-- DisplayList Button -->
@@ -125,14 +123,14 @@
 	</div>
 </div>
 
-			<!-- Modal -->
+<!-- 			 Modal -->
 									
 <div id="myModal" class="modal fade" tabindex="-1"
 	role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog modal-sm" role="document">
 
-			<!-- Modal content-->
+<!-- 			 Modal content -->
 											
 	<div class="modal-content">
 		<div class="modal-header">

@@ -40,4 +40,10 @@ public class FunctionServicesImpl implements FunctionServices {
 	public void createFunction(String str) {
 		repo.save(new Function(str));
 	}
+
+	@Override
+	public void editFunction(String name, boolean isActive, String description, String signature) {
+		Function fct = new Function(name, description, signature, isActive);
+		repo.save(fct);
+	}
 }
