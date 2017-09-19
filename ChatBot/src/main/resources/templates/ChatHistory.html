@@ -3,18 +3,24 @@
 	<div class="container">
 
 
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<div>Event list</div>
+			</div>
 		<div class="panel-body">
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<td>Time</td>
+						<td width="100px">Date</td>
+						<td width="70px">Hour</td>
 						<td>Chatter</td>
 						<td>Message</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="chat : ${chathistory}">
-						<td th:text="${chat.date}"></td>
+						<td th:text="${#temporals.format(chat.date, 'dd-MM-yyyy')}">2000-02-01</td>
+						<td th:text="${#temporals.format(chat.date, 'HH:mm')}">18:00</td>
 						<td th:text="${chat.user.name}"></td>
 						<td th:text="${chat.message}"></td>
 					</tr>
@@ -22,15 +28,34 @@
 			</table>
 
 		</div>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</nav>
+    <!-- Pagination Bar -->
+    <div th:fragment='paginationbar'>
+        <div>
+            <ul class='pagination pagination-centered'>
+                <li th:class="${page.firstPage}?'disabled':''">
+                <span th:if='${page.firstPage}'>First</span>
+                <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>First</a>
+                </li>
+                <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                <span th:if='${not page.hasPreviousPage}'>«</span>
+                <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}' title='Go to previous page'>«</a>
+                </li>
+                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+                <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span th:text='${item.number}'>1</span></a>
+                </li>
+                <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                <span th:if='${not page.hasNextPage}'>»</span>
+                <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}' title='Go to next page'>»</a>
+                </li>
+                <li th:class="${page.lastPage}? 'disabled' : ''">
+                <span th:if='${page.lastPage}'>Last</span>
+                <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+	</div>
 	</div>
 
 </div>

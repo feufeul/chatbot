@@ -4,6 +4,9 @@ package be.formation.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import be.formation.beans.ChatUser;
 import be.formation.beans.Event;
 
@@ -99,5 +102,9 @@ public interface ChatUserServices {
 	 * @return
 	 */
 	public List<ChatUser> getParticipants(int id);
+
+	public Page<ChatUser> displayAllUser(Pageable pageable);
+
+	public Page<Event> displayAllEvent(Pageable pageable);
 
 }

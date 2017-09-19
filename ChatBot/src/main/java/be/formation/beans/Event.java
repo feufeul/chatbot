@@ -2,6 +2,7 @@ package be.formation.beans;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -89,7 +90,9 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", date=" + date + ", description=" + description +"]";
+		return  description+ ", " 
+				+date.toLocalDate() + " à "
+				+date.toLocalTime();
 	}
 
 	

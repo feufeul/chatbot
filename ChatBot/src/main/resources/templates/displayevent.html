@@ -2,9 +2,12 @@
 	<div class="container">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h1>Liste des Participants</h1>
+				<h3 th:text=${event}></h3>
 			</div>
-			<div class="panel-body">
+			<div th:if="${#lists.isEmpty(participants)}" class="panel-body">
+				<p> Il n'y a pas de participants pour cet événement.</p>
+			</div>
+			<div th:if="${not #lists.isEmpty(participants)}" class="panel-body">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -20,6 +23,8 @@
 					</tbody>
 				</table>
 			</div>
+
+			
 		</div>
 	</div>
 </div>

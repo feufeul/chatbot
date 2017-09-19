@@ -15,5 +15,7 @@ public interface MessageServices{
 	public List<Message> showHistory();
 	
 	public Page<Message> displayAll(Pageable pageable);
+	
+	
 
 }

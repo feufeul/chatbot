@@ -11,7 +11,7 @@ public class Function {
 	@Id
 	private String name;
 	private String shortDescription="Description à pourvoir";
-	private String signature="!cmd_to_write arg0 arg1 ( for example )";
+	private String signature= name+" arg0 arg1 ( for example )";
 	private boolean isActive;
 	
 	public Function() {

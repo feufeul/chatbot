@@ -3,6 +3,8 @@ package be.formation.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import be.formation.beans.Function;
@@ -45,5 +47,10 @@ public class FunctionServicesImpl implements FunctionServices {
 	public void editFunction(String name, boolean isActive, String description, String signature) {
 		Function fct = new Function(name, description, signature, isActive);
 		repo.save(fct);
+	}
+
+	@Override
+	public Page<Function> displayAllFunction(Pageable pageable) {
+		return repo.findAll(pageable);
 	}
 }

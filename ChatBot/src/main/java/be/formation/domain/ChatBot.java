@@ -94,6 +94,12 @@ public class ChatBot extends PircBot {
 		case "!man":
 			cmdManager.cmdMan(message);
 			break;
+		case "!mod":
+			cmdManager.cmdMod(usr,message);
+			break;
+		case "!unmod":
+			cmdManager.cmdUnmod(usr,message);
+			break;
 		default:
 			break;
 		}

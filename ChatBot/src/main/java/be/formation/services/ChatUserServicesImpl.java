@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import be.formation.beans.ChatUser;
 import be.formation.beans.Event;
@@ -62,7 +64,7 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	@Override
 	public void upModerator(String name) {
 
-		bot.op(channel, name);
+		bot.op(channel, "/mod "+name);
 		ChatUser usr = repoUser.findOne(name);
 		usr.setModerator(true);
 		repoUser.save(usr);
@@ -72,7 +74,7 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	@Override
 	public void downModerator(String name) {
 
-		bot.deOp(channel, name);
+		bot.sendMessage(channel, "/unmod "+name);
 		ChatUser usr = repoUser.findOne(name);
 		usr.setModerator(false);
 		repoUser.save(usr);
@@ -146,6 +148,16 @@ public class ChatUserServicesImpl implements ChatUserServices {
 	@Override
 	public List<ChatUser> getParticipants(int id) {
 		return repoEvent.findOne(id).getUsers();
+	}
+
+	@Override
+	public Page<ChatUser> displayAllUser(Pageable pageable) {
+		return repoUser.findAll(pageable);
+	}
+
+	@Override
+	public Page<Event> displayAllEvent(Pageable pageable) {
+		return repoEvent.findAll(pageable);
 	}
 
 }

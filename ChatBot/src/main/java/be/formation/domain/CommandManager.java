@@ -64,4 +64,29 @@ public class CommandManager {
 		List<Function> fctList = fctServices.findAllActive(true);
 		fctList.forEach(f -> bot.sendMessage(channel, f.toString()));
 	}
+
+	public void cmdMod(ChatUser usr, String message) {
+		try {
+			if(usr.getIsModerator()) {
+				String chatter = message.split(" ")[1];
+				services.upModerator(chatter);
+			}
+		}catch(Exception e) {
+			bot.sendMessage(channel, "Veuillez respecter la signature.");
+			bot.sendMessage(channel, "Ecrivez comme suit !mod chatter_name");
+		}
+	}
+
+	public void cmdUnmod(ChatUser usr, String message) {
+		try {
+			if(usr.getIsModerator()) {
+
+				String chatter = message.split(" ")[1];
+				services.downModerator(chatter);
+			}
+		}catch(Exception e) {
+			bot.sendMessage(channel, "Veuillez respecter la signature.");
+			bot.sendMessage(channel, "Ecrivez comme suit !mod chatter_name");
+		}
+	}
 }

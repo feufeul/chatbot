@@ -1,62 +1,56 @@
 <div layout:fragment="content" layout:decorator="layout">
 	<div class="container">
+
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<div>User list</div>
+				<div>Event list</div>
 			</div>
 			<div class="panel-body">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<td>Name</td>
-							<td>Messages sent</td>
-							<td width="150px">Chat Status</td>
+							<td width="50px">ID</td>
+							<td width="100px">Date</td>
+							<td width="70px">Time</td>
+							<td>Description</td>
+							<td width="50px">Participants</td>
 							<td width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="user : ${users}">
-							<td th:text="${user.name}"></td>
-							<td th:text="${user.messagesSent}"></td>
-							<td >
-								<div class="btn-group">
-									
-									<!--  Here we check the boolean on Moderator so we can display the present value of the moderator / chatter -->
 
-										<span th:switch="${user.isModerator}">
-										 	<span th:case="true">Moderator</span>
-											<span th:case="false">Chatter</span>
-										</span>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenu">
-										
-										<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
-											<button class="dropdown-item" type="submit" name="user"
-												value="chatter" class="btn btn-primary btn-block">Chatter</button>
-											<button class="dropdown-item" type="submit" name="user"
-												value="mod" class="btn btn-primary btn-block">Moderator</button>
-										</form>
-									</div>
-								</div>
-							</td>
+						<tr th:each="event : ${events}">
+							<td th:text="${event.id}">001</td>
+							<td th:text="${#temporals.format(event.date, 'dd-MM-yyyy')}">2000-02-01</td>
+							<td th:text="${#temporals.format(event.date, 'HH:mm')}">18:00</td>
+							<td th:text="${event.description}">Basic description</td>
+							<td th:text="${#lists.size(event.users)}"></td>
 							<td>
 								<div class="btn-group">
+								
+									<!-- Facade Action button -->
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="false"> Action <span class="caret"></span>
 									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenu" id="dropdownmenu">
 
-									<form th:action="@{/deleteUser/{id}(id=${user.name})}" method="post">
-										<button type="submit" value="Submit" class="btn btn-primary btn-block">Delete</button>
-									</form>
-									<form th:action="@{/upModerator/{id}(id=${user.name})}" method="post">
-										<span th:switch="${user.isModerator}">
-											<button th:case="true" class="dropdown-item" type="submit" name="user"
-												value="chatter" class="btn btn-primary btn-block"> Set as Chatter</button>
-											<button th:case="false" class="dropdown-item" type="submit" name="user"
-												value="mod" class="btn btn-primary btn-block">Set as Moderator</button>
-										</span>
-									</form>
-								</div>
+									<div class="dropdown-menu">
+
+										<!-- Edit Button -->
+										<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" data-id="${event.id}" value="Edit"
+											name="Edit">Edit</button>
+											
+										<!-- DisplayList Button -->
+										<form th:action="@{/displayEvent/{id}(id=${event.id})}"  method="post">
+											<button type="submit" name="Display" value="Display" class="btn btn-primary btn-block">Display Participants</button>
+										</form>
+						
+										<!-- Delete Button -->
+										<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
+
+											<button type="submit" name="Delete" value="Delete"
+												class="btn btn-primary btn-block">Delete</button>
+										</form>
+									</div>
 								</div>
 							</td>
 						</tr>
@@ -64,8 +58,7 @@
 				</table>
 			</div>
 		</div>
-		
-			    <!-- Pagination Bar -->
+		    <!-- Pagination Bar -->
     <div th:fragment='paginationbar'>
         <div>
             <ul class='pagination pagination-centered'>
@@ -92,8 +85,6 @@
             </ul>
         </div>
     </div>
-
-
 	</div>
 </div>
 
@@ -136,7 +127,6 @@
 			</form>
 	
 	</div>
-
 
 
 	</div>
