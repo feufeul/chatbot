@@ -1,5 +1,6 @@
 package be.formation.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -16,6 +17,6 @@ public interface MessageServices{
 	
 	public Page<Message> displayAll(Pageable pageable);
 	
-	
+//	public List<LocalDateTime> displayLastDateMessage();
 
 }

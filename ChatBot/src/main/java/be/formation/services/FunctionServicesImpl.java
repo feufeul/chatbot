@@ -53,4 +53,9 @@ public class FunctionServicesImpl implements FunctionServices {
 	public Page<Function> displayAllFunction(Pageable pageable) {
 		return repo.findAll(pageable);
 	}
+
+	@Override
+	public void deleteFunction(Function findOne) {
+		repo.delete(findOne);
+	}
 }

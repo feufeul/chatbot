@@ -1,5 +1,6 @@
 package be.formation.beans;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class ChatUser{
 	private String name;
 	private int messagesSent;
 	private boolean isModerator;
+	private LocalDateTime lastModified;
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "event_chatuser", joinColumns = @JoinColumn(name = "chatuser_name"), inverseJoinColumns = @JoinColumn(name="event_id"))
 	private List<Event> events;
@@ -42,6 +44,23 @@ public class ChatUser{
 		this.messagesSent=1;
 		this.isModerator=false;
 		this.events = new ArrayList<>();
+		this.lastModified = LocalDateTime.now();
+	}
+
+	public LocalDateTime getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(LocalDateTime lastModified) {
+		this.lastModified = lastModified;
+	}
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
 	}
 
 	/**

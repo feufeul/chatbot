@@ -1,5 +1,6 @@
 package be.formation.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,10 @@ public class MessageServicesImpl implements MessageServices {
 	public Page<Message> displayAll(Pageable pageable) {
 		return repo.findAll(pageable);
 	}
+
+//	@Override
+//	public List<LocalDateTime> displayLastDateMessage() {
+//		 return repo.findLastDateByName();
+//	}
 
 }

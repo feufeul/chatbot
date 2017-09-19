@@ -106,5 +106,7 @@ public interface ChatUserServices {
 	public Page<ChatUser> displayAllUser(Pageable pageable);
 
 	public Page<Event> displayAllEvent(Pageable pageable);
+	
+	
 
 }

@@ -36,6 +36,23 @@ public class FunctionController {
 		}
 		return "redirect:/functions";
 	}
+	
+	@PostMapping("/deleteFunction/{id}")
+	public String deleteFunction(@PathVariable String id) {
+		fctService.deleteFunction(fctService.findOne(id));
+		return "redirect:/functions";
+	}
+	
+	@PostMapping("/createFunction")
+	public String createFunction(@RequestParam(value = "function") String function,
+			@RequestParam(value = "isActive", required=false) boolean isActive,
+			@RequestParam(value = "description") String description,
+			@RequestParam(value = "signature") String signature) {
+		if(fctService.findOne(function)==null) {
+			fctService.editFunction(function, isActive, description, signature);
+		}
+		return "redirect:/functions";
+	}
 
 	@RequestMapping("/functions")
 	public String functionsPage(Model model, Pageable pageable) {

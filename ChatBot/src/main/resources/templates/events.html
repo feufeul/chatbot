@@ -15,6 +15,7 @@
 							<td>Description</td>
 							<td width="50px">Participants</td>
 							<td width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
+							<td width="15px">Delete</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,14 +45,13 @@
 											<button type="submit" name="Display" value="Display" class="btn btn-primary btn-block">Display Participants</button>
 										</form>
 						
-										<!-- Delete Button -->
-										<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
-
-											<button type="submit" name="Delete" value="Delete"
-												class="btn btn-primary btn-block">Delete</button>
-										</form>
 									</div>
 								</div>
+							</td>
+							<td>
+								<form th:action="@{/deleteEvent/{id}(id=${event.id})}" method="post">
+									<button type="submit"  class="glyphicon glyphicon-trash btn-sm btn-primary"></button>
+								</form>
 							</td>
 						</tr>
 					</tbody>

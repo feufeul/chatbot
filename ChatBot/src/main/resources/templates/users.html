@@ -9,6 +9,8 @@
 					<thead>
 						<tr>
 							<td>Name</td>
+							<td>Last message sent date</td>
+							<td>Last message sent time</td>
 							<td>Messages sent</td>
 							<td width="150px">Chat Status</td>
 							<td width="100px" align="right"><span class="glyphicon glyphicon-cog"></span></td>
@@ -17,6 +19,8 @@
 					<tbody>
 						<tr th:each="user : ${users}">
 							<td th:text="${user.name}"></td>
+							<td th:text="${#temporals.format(user.lastModified, 'dd-MM-yyyy')}"></td>
+							<td th:text="${#temporals.format(user.lastModified, 'HH:mm')}"></td>
 							<td th:text="${user.messagesSent}"></td>
 							<td >
 								<div class="btn-group">

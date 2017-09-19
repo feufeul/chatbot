@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import be.formation.beans.ChatUser;
 import be.formation.services.ChatUserServices;
+import be.formation.services.MessageServices;
 
 @Controller
 public class UserController {
 
 	@Autowired
-	private ChatUserServices service;
+	private ChatUserServices chatterService;
+	@Autowired
+	private MessageServices msgServices;
 	
 	@RequestMapping("/users")
 	public String usersPage(Model model, Pageable pageable) {
-		Page<ChatUser> userPage = service.displayAllUser(pageable);
+		Page<ChatUser> userPage = chatterService.displayAllUser(pageable);
 		PageWrapper<ChatUser> page = new PageWrapper<>(userPage, "/users");
 		model.addAttribute("users", page.getContent());
 		model.addAttribute("page", page);
@@ -29,11 +32,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/upModerator/{id}")
-	public String upModerator(@PathVariable String id, @RequestParam(value = "user", required = false) String user) {
+	public String upModerator(@PathVariable String id, 
+			@RequestParam(value = "user", required = false) String user) {
 		if (user.equals("chatter")) {
-			service.downModerator(id);
+			chatterService.downModerator(id);
 		} else {
-			service.upModerator(id);
+			chatterService.upModerator(id);
 		}
 		return "redirect:/users";
 	}
@@ -41,7 +45,7 @@ public class UserController {
 
 	@PostMapping("/deleteUser/{id}")
 	public String deleteUser(@PathVariable String id) {
-		service.deleteUser(service.findOneUser(id));
+		chatterService.deleteUser(chatterService.findOneUser(id));
 		return "redirect:/users";
 	}
 

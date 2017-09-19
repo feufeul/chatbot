@@ -1,5 +1,7 @@
 package be.formation.domain;
 
+import java.time.LocalDateTime;
+
 import org.jibble.pircbot.PircBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,7 +66,9 @@ public class ChatBot extends PircBot {
 		if (usr == null) {
 			services.createUser(new ChatUser(sender));
 		} else {
+			usr.setLastModified(LocalDateTime.now());
 			services.incrMessagesSent(usr);
+			
 		}
 		return usr;
 
