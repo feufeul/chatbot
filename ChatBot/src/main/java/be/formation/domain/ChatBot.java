@@ -38,7 +38,11 @@ public class ChatBot extends PircBot {
 	protected void onMessage(String channel, String sender, String login, String hostname, String message) {
 		//TODO I have to use external Utils to upgrade the modularity
 		ChatUser usr = updateMessageUser(sender);
-		msgServices.createMessage(message, usr);
+		if(usr!= null) {
+			msgServices.createMessage(message, usr);
+		}else {
+			msgServices.createMessage(message, new ChatUser(sender));
+		}
 		String cmd = message.split(" ")[0];
 		if (cmd.startsWith("!")) {
 			if (cmd.equals("!cmd")) {
@@ -61,7 +65,7 @@ public class ChatBot extends PircBot {
 	 * @param sender
 	 * @return
 	 */
-	private ChatUser updateMessageUser(String sender) {
+	private synchronized ChatUser updateMessageUser(String sender) {
 		ChatUser usr = services.findOneUser(sender);
 		if (usr == null) {
 			services.createUser(new ChatUser(sender));

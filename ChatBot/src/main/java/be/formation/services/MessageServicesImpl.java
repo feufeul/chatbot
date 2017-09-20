@@ -19,7 +19,7 @@ public class MessageServicesImpl implements MessageServices {
 	private MessageRepository repo;
 	
 	@Override
-	public void createMessage(String str, ChatUser usr) {
+	public synchronized void createMessage(String str, ChatUser usr) {
 		
 		repo.save(new Message(str, usr));
 		

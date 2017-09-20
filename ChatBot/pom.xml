@@ -30,12 +30,12 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/pircbot/pircbot -->
-<dependency>
-    <groupId>pircbot</groupId>
-    <artifactId>pircbot</artifactId>
-    <version>1.5.0</version>
-</dependency>
-		
+		<dependency>
+			<groupId>pircbot</groupId>
+			<artifactId>pircbot</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -100,8 +100,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
-
-
 </project>
