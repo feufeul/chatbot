@@ -9,18 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import be.formation.beans.ChatUser;
 import be.formation.services.ChatUserServices;
-import be.formation.services.MessageServices;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private ChatUserServices chatterService;
-	@Autowired
-	private MessageServices msgServices;
+
 	
 	@RequestMapping("/users")
 	public String usersPage(Model model, Pageable pageable) {

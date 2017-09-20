@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-
-
 	// Login form
 	@GetMapping("/login")
 	public String login() {

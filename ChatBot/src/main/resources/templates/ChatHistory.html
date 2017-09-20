@@ -1,6 +1,7 @@
 <div layout:fragment="content" layout:decorator="layout">
 
 	<div class="container">
+	<div th:if="${chatHistory != 'null'}">
 
 
 		<div class="panel panel-info">
@@ -55,6 +56,7 @@
             </ul>
         </div>
     </div>
+	</div>
 	</div>
 	</div>
 
